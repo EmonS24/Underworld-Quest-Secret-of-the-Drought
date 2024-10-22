@@ -32,5 +32,13 @@ public class PlayerAnim : MonoBehaviour
         animator.SetBool("isCrouching", PlayerVar.isCrouching); 
 
         animator.SetBool("canClimb", playerClimb.canClimb); 
+
+        animator.SetBool("isPushing", PlayerVar.isPushing);
+
+        animator.SetBool("isPulling", PlayerVar.isPulling);
+
+        animator.SetBool("isGrabbing", PlayerVar.isGrabbing);
+
+        Debug.Log($"isPushing: {PlayerVar.isPushing}, isPulling: {PlayerVar.isPulling}");
     }
 }

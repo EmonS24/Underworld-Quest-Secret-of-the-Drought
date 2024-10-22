@@ -9,23 +9,23 @@ public class PlayerClimb : MonoBehaviour
     [SerializeField] private Transform wallCheck; 
     [SerializeField] private Vector2 wallCheckSize; 
     [SerializeField] private Vector2 wallCheckOffset;
-
-    [SerializeField] private Vector2 offset1; // Offset to the starting position of the climb
-    [SerializeField] private Vector2 offset2; // Offset to the end position of the climb
-    private Vector2 climbBegunPosition; // Position where the climb begins
-    private Vector2 climbOverPosition; // Position where the climb ends
+    [SerializeField] private Vector2 offset1; 
+    [SerializeField] private Vector2 offset2; 
+    [SerializeField] private float climbDuration;
+    private Vector2 climbBegunPosition; 
+    private Vector2 climbOverPosition; 
     public LayerMask groundLayer;
     private bool isWallDetected;
     public bool ledgeDetected;
     private bool canGrabLedge = true;
     public bool canClimb;
 
-    private bool isClimbing = false; // State to track climbing
+    private bool isClimbing = false; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); // Animator reference
+        animator = GetComponent<Animator>(); 
     }
 
     void Update()
@@ -46,21 +46,20 @@ public class PlayerClimb : MonoBehaviour
 
             Vector2 ledgePosition = GetComponentInChildren<LedgeDetection>().transform.position;
 
-            // Adjust climb positions based on the player's facing direction
-            if (transform.localScale.x < 0) // If the player is facing left
+            if (transform.localScale.x < 0)
             {
                 climbBegunPosition = ledgePosition + new Vector2(-offset1.x, offset1.y);
                 climbOverPosition = ledgePosition + new Vector2(-offset2.x, offset2.y);
             }
-            else // If the player is facing right
+            else 
             {
                 climbBegunPosition = ledgePosition + offset1;
                 climbOverPosition = ledgePosition + offset2;
             }
 
             canClimb = true;
-            isClimbing = true; // Start climbing
-            animator.SetBool("canClimb", true); // Trigger climbing animation
+            isClimbing = true; 
+            animator.SetBool("canClimb", true); 
 
             rb.velocity = Vector2.zero;
             rb.isKinematic = true;
@@ -73,14 +72,15 @@ public class PlayerClimb : MonoBehaviour
 
     private IEnumerator ClimbCoroutine()
     {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(climbDuration);
 
         transform.position = climbOverPosition;
 
+        // Reset climbing state
         canClimb = false;
-        isClimbing = false; // Reset climbing state
-        animator.SetBool("canClimb", false); // End climbing animation
-        rb.isKinematic = false; // Re-enable player control
+        isClimbing = false;
+        animator.SetBool("canClimb", false);
+        rb.isKinematic = false; 
 
         AllowLedgeGrab();
     }

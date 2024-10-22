@@ -11,6 +11,9 @@ public class PlayerVar : MonoBehaviour
     public static bool isGrounded;   
     public static bool isClimbing;  
     public static bool isCrouching;   
+    public static bool isPushing;
+    public static bool isPulling;
+    
     public static LayerMask groundLayer;   
 
     private void Update()
