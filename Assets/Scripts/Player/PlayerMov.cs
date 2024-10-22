@@ -9,6 +9,7 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] public float walkSpeed;    // Speed when walking
     [SerializeField] public float runSpeed;    // Speed when running
     [SerializeField] public float crouchSpeed; // Speed when crouching
+    public bool allowMove = true;
 
     void Start()
     {
@@ -17,7 +18,10 @@ public class PlayerMov : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if (allowMove)
+        {
+            Move();
+        }
     }
 
     public void SetCrouching(bool crouching)

@@ -2660,7 +2660,6 @@ GameObject:
   - component: {fileID: 2052002549}
   - component: {fileID: 2052002556}
   - component: {fileID: 2052002561}
-  - component: {fileID: 2052002562}
   - component: {fileID: 2052002560}
   m_Layer: 6
   m_Name: Player
@@ -2705,6 +2704,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 6
   crouchSpeed: 2
+  allowMove: 1
 --- !u!114 &2052002551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2787,7 +2787,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &2052002554
 SpriteRenderer:
@@ -2850,7 +2850,7 @@ Transform:
   m_GameObject: {fileID: 2052002547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.74, y: 0.12, z: 0}
+  m_LocalPosition: {x: 3.15, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2933,22 +2933,6 @@ MonoBehaviour:
     m_Bits: 128
   ledgeDetected: 0
   canClimb: 0
---- !u!114 &2052002562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052002547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a6ab0030fd53641aad2c76d838545a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushPullSpeed: 2
-  blockLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &2111568849
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,7 +3129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6222501017372361191, guid: f133b03b8b8855e429d88de61c2b89bb, type: 3}
       propertyPath: m_GravityScale
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -19,6 +19,7 @@ public class PlayerClimb : MonoBehaviour
     public bool ledgeDetected;
     private bool canGrabLedge = true;
     public bool canClimb;
+    private PlayerMov playerMov;
 
     private bool isClimbing = false; 
 
@@ -26,6 +27,7 @@ public class PlayerClimb : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>(); 
+        playerMov = GetComponent<PlayerMov>();
     }
 
     void Update()
@@ -72,7 +74,10 @@ public class PlayerClimb : MonoBehaviour
 
     private IEnumerator ClimbCoroutine()
     {
+        playerMov.allowMove = false;
+
         yield return new WaitForSeconds(climbDuration);
+        playerMov.allowMove = true;
 
         transform.position = climbOverPosition;
 
