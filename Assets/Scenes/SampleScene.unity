@@ -2931,10 +2931,11 @@ GameObject:
   - component: {fileID: 2052002553}
   - component: {fileID: 2052002552}
   - component: {fileID: 2052002551}
+  - component: {fileID: 2052002559}
   - component: {fileID: 2052002550}
   - component: {fileID: 2052002549}
   - component: {fileID: 2052002556}
-  - component: {fileID: 2052002559}
+  - component: {fileID: 2052002561}
   - component: {fileID: 2052002560}
   m_Layer: 6
   m_Name: Player
@@ -2978,7 +2979,6 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 6
   crouchSpeed: 2
-  isCrouching: 0
 --- !u!114 &2052002551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,7 +3023,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.047049105, y: -0.00033897161}
+  m_Offset: {x: -0.04176244, y: -0.00033903122}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3034,7 +3034,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.935809, y: 2.2828937}
+  m_Size: {x: 0.7581859, y: 2.2828937}
   m_EdgeRadius: 0
 --- !u!50 &2052002553
 Rigidbody2D:
@@ -3124,7 +3124,7 @@ Transform:
   m_GameObject: {fileID: 2052002547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.32, y: 1.94, z: 0}
+  m_LocalPosition: {x: 19.783, y: 4.609, z: 0}
   m_LocalScale: {x: 1.0235339, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3152,7 +3152,6 @@ MonoBehaviour:
   ceilingLayer:
     serializedVersion: 2
     m_Bits: 128
-  isCrouching: 0
 --- !u!114 &2052002559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,6 +3185,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2052002561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052002547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e309dd5691550d3428a55fb07e96a3d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redXOffset: 0.6
+  redYOffset: 1.6
+  redXSize: 0.2
+  redYSize: 0.05
+  greenXOffset: 0.6
+  greenYOffset: 0.5
+  greenXSize: 0.2
+  greenYSize: 0.05
+  startGrav: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &2111568849
 GameObject:
   m_ObjectHideFlags: 0

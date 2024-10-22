@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMov : MonoBehaviour
@@ -10,7 +9,6 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] public float walkSpeed;    // Speed when walking
     [SerializeField] public float runSpeed;    // Speed when running
     [SerializeField] public float crouchSpeed; // Speed when crouching
-    public bool isCrouching = false; // Track if the player is crouching
 
     void Start()
     {
@@ -24,14 +22,14 @@ public class PlayerMov : MonoBehaviour
 
     public void SetCrouching(bool crouching)
     {
-        isCrouching = crouching; 
+        PlayerVar.isCrouching = crouching; 
     }
 
     public void Move()
     {
         moveInputH = Input.GetAxisRaw("Horizontal");
 
-        float speed = isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
+        float speed = PlayerVar.isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
 
         rb.velocity = new Vector2(moveInputH * speed, rb.velocity.y);
 
@@ -50,7 +48,7 @@ public class PlayerMov : MonoBehaviour
 
     public float GetCurrentSpeed()
     {
-        return isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
+        return PlayerVar.isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
     }
 
     public bool IsMoving()

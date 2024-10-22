@@ -6,13 +6,13 @@ public class PlayerAnim : MonoBehaviour
 {
     private Animator animator;
     private PlayerMov playerMov;
-    private PlayerCrouch playerCrouch;
+    private PlayerClimb playerClimb;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         playerMov = GetComponent<PlayerMov>();
-        playerCrouch = GetComponent<PlayerCrouch>(); 
+        playerClimb = GetComponent<PlayerClimb>();
     }
 
     void Update()
@@ -26,11 +26,11 @@ public class PlayerAnim : MonoBehaviour
         animator.SetBool("isMove", PlayerVar.isMove);
 
         animator.SetFloat("speed", playerMov.GetCurrentSpeed());
-
+    
         animator.SetBool("isGrounded", PlayerVar.isGrounded);
 
-        animator.SetBool("isCrouching", playerCrouch.isCrouching); 
+        animator.SetBool("isCrouching", PlayerVar.isCrouching); 
 
-        animator.SetBool("isClimbing", PlayerVar.isClimbing);
+        animator.SetBool("canClimb", playerClimb.canClimb); 
     }
 }

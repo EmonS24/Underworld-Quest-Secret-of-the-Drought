@@ -4,64 +4,66 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
-    public Transform ledgeCheck;       // For checking ledges
-    public Transform leftWallCheck;    // For checking walls on the left
-    public Transform rightWallCheck;   // For checking walls on the right
-    public float ledgeCheckDistance = 0.5f;  // Distance for ledge detection
-    public float wallCheckDistance = 0.5f;   // Distance for wall detection
-    public LayerMask groundLayer;      // Layer for both ground and walls
+    [SerializeField] private Transform wallCheck; 
+    [SerializeField] private Vector2 wallCheckSize; 
+    [SerializeField] private Vector2 wallCheckOffset;
 
-    private Rigidbody2D rb;
+    [SerializeField] private Vector2 offset1;
+    [SerializeField] private Vector2 offset2;
+    private Vector2 climbBegunPosition;
+    private Vector2 climbOverPosition;
+    public LayerMask groundLayer;
+    private bool isWallDetected;
+    public bool ledgeDetected;
+    private bool canGrabLedge = true;
+    public bool canClimb;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
 
     void Update()
     {
-        LedgeGrabCheck();
+        CollisionCheck();
+        CheckForLedge();
+        LedgeClimbOver();
+        AllowLedgeGrab();
     }
 
-    private void LedgeGrabCheck()
+    private void CheckForLedge()
     {
-        // Check if the player is next to a wall
-        bool isNextToWall = Physics2D.Raycast(leftWallCheck.position, Vector2.left, wallCheckDistance, groundLayer) ||
-                            Physics2D.Raycast(rightWallCheck.position, Vector2.right, wallCheckDistance, groundLayer);
-        
-        // Check if there's a ledge above (use upward ray)
-        bool isLedgeAbove = Physics2D.Raycast(ledgeCheck.position, Vector2.up, ledgeCheckDistance, groundLayer);
-
-        // Debugging outputs
-        Debug.Log($"Is next to wall: {isNextToWall}, Is ledge above: {isLedgeAbove}, Is jumping: {PlayerVar.isJumping}");
-
-        if (isNextToWall && !isLedgeAbove && PlayerVar.isJumping)
+        if(ledgeDetected && canGrabLedge)
         {
-            // Trigger climbing when jumping into a ledge
-            ClimbLedge();
+            canGrabLedge = false;
+
+            Vector2 ledgePosition = GetComponentInChildren<LedgeDetection>().transform.position;
+
+            climbBegunPosition = ledgePosition + offset1;
+            climbOverPosition = ledgePosition + offset2;
+
+            canClimb = true;
         }
     }
 
-    private void ClimbLedge()
+private void LedgeClimbOver()
+{
+    if (canClimb) // Make sure this is the right condition
     {
-        // Adjust player's position to climb over the ledge
-        transform.position += new Vector3(0, 1.0f, 0); // Adjust height as necessary
-        PlayerVar.isClimbing = true; // Set climbing state
-        rb.velocity = Vector2.zero; // Stop movement when climbing
+        transform.position = climbOverPosition;
+        canClimb = false; // This might be causing issues
+        Invoke("AllowLedgeGrab", 0.1f);
+    }
+}
 
-        // Debugging confirmation
-        Debug.Log("Climbing ledge!");
+    private void AllowLedgeGrab() => canGrabLedge = true;
+
+    public void CollisionCheck()
+    {
+        isWallDetected = Physics2D.BoxCast((Vector2)wallCheck.position + wallCheckOffset, wallCheckSize, 0f, Vector2.zero, 0f, groundLayer);
+
+        Debug.Log($"Wall Detected: {isWallDetected}");
+        Debug.Log($"Ledge Detected: {ledgeDetected}");
     }
 
     private void OnDrawGizmos()
     {
-        // Visualize ledge check upward
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + Vector3.up * ledgeCheckDistance);
-
-        // Visualize wall checks
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(leftWallCheck.position, leftWallCheck.position + Vector3.left * wallCheckDistance); // Left wall check
-        Gizmos.DrawLine(rightWallCheck.position, rightWallCheck.position + Vector3.right * wallCheckDistance); // Right wall check
+        Gizmos.DrawWireCube((Vector2)wallCheck.position + wallCheckOffset, wallCheckSize);
     }
 }

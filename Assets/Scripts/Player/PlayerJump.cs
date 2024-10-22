@@ -12,7 +12,7 @@ public class PlayerJump : MonoBehaviour
     public float lowJumpMultiplier;
     public Transform groundCheck;
     public LayerMask groundLayer;
-    private float groundCheckRadius = 0.1f;
+    public float groundCheckRadius = 0.1f;
 
     void Start()
     {
@@ -66,7 +66,7 @@ public class PlayerJump : MonoBehaviour
 
     public void CheckGrounded()
     {
-        PlayerVar.isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        PlayerVar.isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
 
         if (PlayerVar.isGrounded)
         {
