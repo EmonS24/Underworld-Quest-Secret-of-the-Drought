@@ -33,13 +33,13 @@ public class PlayerPushPull : MonoBehaviour
 
             if (detectedBlock != null)
             {
-                Debug.Log("Block grabbed: " + detectedBlock.name); // Add this line
+                Debug.Log("Block grabbed: " + detectedBlock.name);
                 isGrabbing = true;
                 blockCollider = detectedBlock;
             }
             else
             {
-                Debug.Log("No block detected."); // Add this line
+                Debug.Log("No block detected."); 
             }
         }
 
