@@ -4,32 +4,43 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
+    private Rigidbody2D rb;
+    private Animator animator;
     [SerializeField] private Transform wallCheck; 
     [SerializeField] private Vector2 wallCheckSize; 
     [SerializeField] private Vector2 wallCheckOffset;
 
-    [SerializeField] private Vector2 offset1;
-    [SerializeField] private Vector2 offset2;
-    private Vector2 climbBegunPosition;
-    private Vector2 climbOverPosition;
+    [SerializeField] private Vector2 offset1; 
+    [SerializeField] private Vector2 offset2; 
+    private Vector2 climbBegunPosition; 
+    private Vector2 climbOverPosition; 
     public LayerMask groundLayer;
     private bool isWallDetected;
     public bool ledgeDetected;
     private bool canGrabLedge = true;
     public bool canClimb;
 
+    private bool isClimbing = false;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); 
+    }
 
     void Update()
     {
         CollisionCheck();
-        CheckForLedge();
-        LedgeClimbOver();
-        AllowLedgeGrab();
+
+        if (!isClimbing)
+        {
+            CheckForLedge();
+        }
     }
 
     private void CheckForLedge()
     {
-        if(ledgeDetected && canGrabLedge)
+        if (ledgeDetected && canGrabLedge)
         {
             canGrabLedge = false;
 
@@ -39,18 +50,31 @@ public class PlayerClimb : MonoBehaviour
             climbOverPosition = ledgePosition + offset2;
 
             canClimb = true;
+            isClimbing = true; 
+            animator.SetBool("canClimb", true); 
+
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+
+            transform.position = climbBegunPosition; 
+
+            StartCoroutine(ClimbCoroutine());
         }
     }
 
-private void LedgeClimbOver()
-{
-    if (canClimb) // Make sure this is the right condition
+    private IEnumerator ClimbCoroutine()
     {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
         transform.position = climbOverPosition;
-        canClimb = false; // This might be causing issues
-        Invoke("AllowLedgeGrab", 0.1f);
+
+        canClimb = false;
+        isClimbing = false; 
+        animator.SetBool("canClimb", false); 
+        rb.isKinematic = false; 
+
+        AllowLedgeGrab();
     }
-}
 
     private void AllowLedgeGrab() => canGrabLedge = true;
 
