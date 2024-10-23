@@ -15,6 +15,7 @@ public class PlayerJump : MonoBehaviour
     public LayerMask groundLayer;
     public float groundCheckRadius = 0.1f;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,7 +38,7 @@ public class PlayerJump : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        if (PlayerVar.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (PlayerVar.isGrounded && Input.GetKeyDown(KeyCode.Space) && !PlayerVar.isCrouching)
         {
             PlayerVar.isJumping = true;
             jumpTimeCounter = jumpTime;

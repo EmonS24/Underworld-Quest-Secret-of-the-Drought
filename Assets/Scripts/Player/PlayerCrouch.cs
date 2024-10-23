@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCrouch : MonoBehaviour
 {
     private PlayerMov playerMov;
+    private PlayerJump playerJump;
     public Transform ceilingCheck;
     public float ceilingCheckDistance = 0.2f;
     public LayerMask ceilingLayer;
@@ -70,7 +71,6 @@ public class PlayerCrouch : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
         Gizmos.DrawLine(ceilingCheck.position, ceilingCheck.position + Vector3.up * ceilingCheckDistance);
         Gizmos.DrawSphere(ceilingCheck.position + Vector3.up * ceilingCheckDistance, 0.1f);
     }

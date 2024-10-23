@@ -10,6 +10,9 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] public float runSpeed;    // Speed when running
     [SerializeField] public float crouchSpeed; // Speed when crouching
     public bool allowMove = true;
+    
+    // New variable to track the last action
+    private bool lastActionWasPulling = false; 
 
     void Start()
     {
@@ -37,7 +40,17 @@ public class PlayerMov : MonoBehaviour
 
         rb.velocity = new Vector2(moveInputH * speed, rb.velocity.y);
 
-        // Flip sprite 
+        // Check for grabbing and update lastActionWasPulling
+        if (PlayerVar.isGrabbing)
+        {
+            // Do not flip the sprite if the last action was pulling
+            if (lastActionWasPulling)
+            {
+                return;
+            }
+        }
+
+        // Flip sprite based on movement input
         if (moveInputH > 0)
         {
             transform.localScale = new Vector2(1f, transform.localScale.y);  
@@ -63,5 +76,11 @@ public class PlayerMov : MonoBehaviour
     public bool IsFalling()
     {
         return rb.velocity.y < 0 && !PlayerVar.isGrounded;
+    }
+
+    // Call this method when the player starts pulling
+    public void SetLastActionToPulling(bool isPulling)
+    {
+        lastActionWasPulling = isPulling;
     }
 }

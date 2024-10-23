@@ -2062,8 +2062,8 @@ Transform:
   m_GameObject: {fileID: 1373673670}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -51.6, y: 1.28, z: 0.054966632}
-  m_LocalScale: {x: 13.040905, y: 0.98913693, z: 1}
+  m_LocalPosition: {x: -51.6, y: -1.3394, z: 0.054966632}
+  m_LocalScale: {x: 13.040905, y: 6.228002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 926232986}
@@ -2660,6 +2660,7 @@ GameObject:
   - component: {fileID: 2052002549}
   - component: {fileID: 2052002556}
   - component: {fileID: 2052002561}
+  - component: {fileID: 2052002562}
   - component: {fileID: 2052002560}
   m_Layer: 6
   m_Name: Player
@@ -2925,14 +2926,32 @@ MonoBehaviour:
   wallCheck: {fileID: 1589090851}
   wallCheckSize: {x: 0.3, y: 2.05}
   wallCheckOffset: {x: 0, y: -0.1}
-  offset1: {x: -0.5, y: -0.9}
-  offset2: {x: 0.6, y: 1.2}
+  offset1: {x: -0.34, y: -0.45}
+  offset2: {x: 0.1, y: 1.2}
   climbDuration: 0.8
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   ledgeDetected: 0
   canClimb: 0
+--- !u!114 &2052002562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052002547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a6ab0030fd53641aad2c76d838545a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  detectRadius: 0.5
+  playerPushPullSpeed: 2
+  blockPushPullSpeed: 2
 --- !u!1 &2111568849
 GameObject:
   m_ObjectHideFlags: 0

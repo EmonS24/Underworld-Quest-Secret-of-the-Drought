@@ -81,7 +81,6 @@ public class PlayerClimb : MonoBehaviour
 
         transform.position = climbOverPosition;
 
-        // Reset climbing state
         canClimb = false;
         isClimbing = false;
         animator.SetBool("canClimb", false);
@@ -95,9 +94,6 @@ public class PlayerClimb : MonoBehaviour
     public void CollisionCheck()
     {
         isWallDetected = Physics2D.BoxCast((Vector2)wallCheck.position + wallCheckOffset, wallCheckSize, 0f, Vector2.zero, 0f, groundLayer);
-
-        Debug.Log($"Wall Detected: {isWallDetected}");
-        Debug.Log($"Ledge Detected: {ledgeDetected}");
     }
 
     private void OnDrawGizmos()
