@@ -81,6 +81,7 @@ public class PlayerClimb : MonoBehaviour
 
         transform.position = climbOverPosition;
 
+        // Reset climbing state
         canClimb = false;
         isClimbing = false;
         animator.SetBool("canClimb", false);

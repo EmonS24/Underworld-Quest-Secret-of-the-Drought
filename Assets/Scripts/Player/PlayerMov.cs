@@ -6,20 +6,17 @@ public class PlayerMov : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float moveInputH;
-    [SerializeField] public float walkSpeed;    // Speed when walking
-    [SerializeField] public float runSpeed;    // Speed when running
-    [SerializeField] public float crouchSpeed; // Speed when crouching
+    [SerializeField] public float walkSpeed;    
+    [SerializeField] public float runSpeed;    
+    [SerializeField] public float crouchSpeed; 
     public bool allowMove = true;
-    
-    // New variable to track the last action
-    private bool lastActionWasPulling = false; 
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if (allowMove)
         {
@@ -27,40 +24,29 @@ public class PlayerMov : MonoBehaviour
         }
     }
 
-    public void SetCrouching(bool crouching)
-    {
-        PlayerVar.isCrouching = crouching; 
-    }
-
     public void Move()
     {
         moveInputH = Input.GetAxisRaw("Horizontal");
 
         float speed = PlayerVar.isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
-
         rb.velocity = new Vector2(moveInputH * speed, rb.velocity.y);
 
-        // Check for grabbing and update lastActionWasPulling
-        if (PlayerVar.isGrabbing)
-        {
-            // Do not flip the sprite if the last action was pulling
-            if (lastActionWasPulling)
-            {
-                return;
-            }
-        }
-
-        // Flip sprite based on movement input
+        // Flip sprite
         if (moveInputH > 0)
         {
-            transform.localScale = new Vector2(1f, transform.localScale.y);  
+            transform.localScale = new Vector2(1f, transform.localScale.y);
         }
         else if (moveInputH < 0)
         {
-            transform.localScale = new Vector2(-1f, transform.localScale.y); 
+            transform.localScale = new Vector2(-1f, transform.localScale.y);
         }
-        
+
         PlayerVar.isMove = moveInputH != 0;
+    }
+
+    public void SetCrouching(bool crouching)
+    {
+        PlayerVar.isCrouching = crouching; 
     }
 
     public float GetCurrentSpeed()
@@ -76,11 +62,5 @@ public class PlayerMov : MonoBehaviour
     public bool IsFalling()
     {
         return rb.velocity.y < 0 && !PlayerVar.isGrounded;
-    }
-
-    // Call this method when the player starts pulling
-    public void SetLastActionToPulling(bool isPulling)
-    {
-        lastActionWasPulling = isPulling;
     }
 }

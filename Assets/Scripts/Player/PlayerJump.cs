@@ -19,6 +19,7 @@ public class PlayerJump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.isKinematic = false; 
     }
 
     void Update()

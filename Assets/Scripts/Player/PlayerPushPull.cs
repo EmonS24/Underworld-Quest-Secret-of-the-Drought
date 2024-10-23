@@ -5,21 +5,20 @@ using UnityEngine;
 public class PlayerPushPull : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private bool isGrabbing = false;
     private Transform grabbedBlock;
-    private Rigidbody2D blockRb;  // Reference to the block's Rigidbody
+    private Rigidbody2D blockRb;
 
     [SerializeField] private LayerMask blockLayer;
     [SerializeField] private float detectRadius = 0.5f;
-    [SerializeField] private float playerPushPullSpeed = 2f;  // Speed for pushing/pulling the player
-    [SerializeField] private float blockPushPullSpeed = 2f;   // Speed for pushing/pulling the block
+    [SerializeField] private float playerPushPullSpeed = 2f;
+    [SerializeField] private float blockPushPullSpeed = 2f;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         CheckGrabInput();
         HandleBlockMovement();
@@ -29,89 +28,64 @@ public class PlayerPushPull : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!isGrabbing)
+            if (PlayerVar.isGrabbing)
             {
-                // Detect if there's a block to grab
+                ReleaseBlock();
+            }
+            else
+            {
                 Collider2D detectedBlock = Physics2D.OverlapCircle(transform.position, detectRadius, blockLayer);
 
                 if (detectedBlock != null)
                 {
-                    isGrabbing = true;
-                    grabbedBlock = detectedBlock.transform;
-                    blockRb = grabbedBlock.GetComponent<Rigidbody2D>();  // Get the Rigidbody of the block
-
-                    // Reset block physics
-                    blockRb.isKinematic = false;  // Allow movement when grabbed
-                    blockRb.constraints = RigidbodyConstraints2D.FreezeRotation;  // Freeze rotation
-
-                    PlayerVar.isGrabbing = true;
-                    Debug.Log("Block grabbed: " + detectedBlock.name);
+                    GrabBlock(detectedBlock);
                 }
                 else
                 {
                     Debug.Log("No block detected.");
                 }
             }
-            else
-            {
-                ReleaseBlock();
-            }
         }
+    }
+
+    private void GrabBlock(Collider2D detectedBlock)
+    {
+        PlayerVar.isGrabbing = true;
+        grabbedBlock = detectedBlock.transform;
+        blockRb = grabbedBlock.GetComponent<Rigidbody2D>();
+        blockRb.isKinematic = true;  // Prevent physics interactions
+        Debug.Log("Block grabbed: " + detectedBlock.name);
     }
 
     private void HandleBlockMovement()
     {
-        if (isGrabbing && grabbedBlock != null)
+        if (PlayerVar.isGrabbing && grabbedBlock != null)
         {
-            // Get the horizontal movement input
+            // Get movement input
             float moveInput = Input.GetAxisRaw("Horizontal");
 
-            // If the player is trying to push or pull the block
+            // Move the player
+            Vector2 playerVelocity = new Vector2(moveInput * playerPushPullSpeed, rb.velocity.y);
+            rb.velocity = playerVelocity;
+
+            // Move the block
             if (moveInput != 0)
             {
-                // Use blockPushPullSpeed for the block's movement
-                blockRb.velocity = new Vector2(moveInput * blockPushPullSpeed, blockRb.velocity.y);  
-
-                // Set the player's velocity based on their movement input
-                Vector2 playerVelocity = new Vector2(moveInput * playerPushPullSpeed, rb.velocity.y);
-                rb.velocity = playerVelocity;  // Move the player
-
-                // Set the pushing/pulling state
-                PlayerVar.isPushing = moveInput > 0; // Set to true if moving right
-                PlayerVar.isPulling = moveInput < 0;  // Set to true if moving left
-
-                // Update last action in PlayerMov
-                if (PlayerVar.isPulling)
-                {
-                    GetComponent<PlayerMov>().SetLastActionToPulling(true);
-                }
-                else
-                {
-                    GetComponent<PlayerMov>().SetLastActionToPulling(false);
-                }
-            }
-            else
-            {
-                // Stop block movement when player stops moving
-                blockRb.velocity = Vector2.zero;  
-                // Reset pushing/pulling state
-                PlayerVar.isPushing = false;
-                PlayerVar.isPulling = false;
-                GetComponent<PlayerMov>().SetLastActionToPulling(false);  // Reset last action
+                blockRb.MovePosition(grabbedBlock.position + new Vector3(moveInput * blockPushPullSpeed * Time.deltaTime, 0f, 0f));
             }
         }
     }
 
     private void ReleaseBlock()
     {
-        isGrabbing = false;
-        grabbedBlock = null;
-        blockRb = null;  // Reset block Rigidbody
-
-        PlayerVar.isGrabbing = false;
-        PlayerVar.isPushing = false; // Reset pushing state
-        PlayerVar.isPulling = false; // Reset pulling state
-        Debug.Log("Block released.");
+        if (grabbedBlock != null)
+        {
+            blockRb.isKinematic = false;  // Restore physics interactions
+            PlayerVar.isGrabbing = false;
+            grabbedBlock = null;
+            blockRb = null;
+            Debug.Log("Block released.");
+        }
     }
 
     private void OnDrawGizmos()

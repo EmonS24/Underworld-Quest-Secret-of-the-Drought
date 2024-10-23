@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerCrouch : MonoBehaviour
 {
     private PlayerMov playerMov;
-    private PlayerJump playerJump;
     public Transform ceilingCheck;
     public float ceilingCheckDistance = 0.2f;
     public LayerMask ceilingLayer;
