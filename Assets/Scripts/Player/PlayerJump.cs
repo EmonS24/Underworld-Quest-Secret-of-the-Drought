@@ -47,7 +47,7 @@ public class PlayerJump : MonoBehaviour
         }
 
         // hold jump
-        if (Input.GetKey(KeyCode.Space) && PlayerVar.isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && PlayerVar.isJumping)
         {
             if (jumpTimeCounter > 0)
             {
