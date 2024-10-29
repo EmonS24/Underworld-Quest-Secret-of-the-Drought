@@ -5,31 +5,28 @@ using UnityEngine;
 public class PlayerAnim : MonoBehaviour
 {
     private Animator animator;
-    private PlayerMov playerMov;
-    private PlayerClimb playerClimb;
+    private PlayerVar player;
+    private PlayerMov move;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        playerMov = GetComponent<PlayerMov>();
-        playerClimb = GetComponent<PlayerClimb>();
+        player = GetComponent<PlayerVar>();
+        move = GetComponent<PlayerMov>();
     }
 
     void Update()
     {
-        UpdateAnimator();
+        UpdateAnimation();
     }
 
-    private void UpdateAnimator()
+    private void UpdateAnimation()
     {
-        PlayerVar.isMove = playerMov.IsMoving();
-        animator.SetBool("isMove", PlayerVar.isMove);
-
-        animator.SetFloat("speed", playerMov.GetCurrentSpeed());
-    
-        animator.SetBool("isGrounded", PlayerVar.isGrounded);
-        animator.SetBool("isCrouching", PlayerVar.isCrouching); 
-        animator.SetBool("canClimb", playerClimb.canClimb); 
-
+        animator.SetFloat("speed", move.GetCurrentSpeed());
+        animator.SetBool("isMove", player.isMove);
+        animator.SetBool("isJumping", player.isJumping);
+        animator.SetBool("isGrounded", player.isGrounded);
+        animator.SetBool("isClimbing", player.isClimbing);
+        animator.SetBool("isCrouching", player.isCrouching);
     }
 }

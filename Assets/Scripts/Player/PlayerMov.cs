@@ -10,10 +10,12 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] public float runSpeed;    
     [SerializeField] public float crouchSpeed; 
     public bool allowMove = true;
+    private PlayerVar player;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<PlayerVar>();
     }
 
     private void Update()
@@ -24,14 +26,40 @@ public class PlayerMov : MonoBehaviour
         }
     }
 
-    public void Move()
+    private void Move()
     {
         moveInputH = Input.GetAxisRaw("Horizontal");
 
-        float speed = PlayerVar.isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
+        float speed = GetCurrentSpeed();
+        
         rb.velocity = new Vector2(moveInputH * speed, rb.velocity.y);
 
-        // Flip sprite
+        FlipSprite();
+
+        player.isMove = moveInputH != 0;
+    }
+
+    
+    public float GetCurrentSpeed()
+    {
+        float speed;
+        if (player.isCrouching)
+        {
+            speed = crouchSpeed;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = runSpeed;
+        }
+        else
+        {
+            speed = walkSpeed;
+        }
+        return speed;
+    }
+
+    private void FlipSprite()
+    {
         if (moveInputH > 0)
         {
             transform.localScale = new Vector2(1f, transform.localScale.y);
@@ -40,27 +68,5 @@ public class PlayerMov : MonoBehaviour
         {
             transform.localScale = new Vector2(-1f, transform.localScale.y);
         }
-
-        PlayerVar.isMove = moveInputH != 0;
-    }
-
-    public void SetCrouching(bool crouching)
-    {
-        PlayerVar.isCrouching = crouching; 
-    }
-
-    public float GetCurrentSpeed()
-    {
-        return PlayerVar.isCrouching ? crouchSpeed : (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
-    }
-
-    public bool IsMoving()
-    {
-        return moveInputH != 0;
-    }
-
-    public bool IsFalling()
-    {
-        return rb.velocity.y < 0 && !PlayerVar.isGrounded;
     }
 }

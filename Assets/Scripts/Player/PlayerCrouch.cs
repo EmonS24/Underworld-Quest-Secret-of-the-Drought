@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class PlayerCrouch : MonoBehaviour
 {
-    private PlayerMov playerMov;
     public Transform ceilingCheck;
     public float ceilingCheckDistance = 0.2f;
     public LayerMask ceilingLayer;
 
     private Vector3 originalCeilingCheckPosition;
     private Vector3 crouchCeilingCheckPosition;
-
+    private PlayerVar player;
 
     void Start()
     {
-        playerMov = GetComponent<PlayerMov>();
+        player = GetComponent<PlayerVar>();
 
         originalCeilingCheckPosition = ceilingCheck.localPosition;
-        crouchCeilingCheckPosition = new Vector3(originalCeilingCheckPosition.x, originalCeilingCheckPosition.y - 1.0f, originalCeilingCheckPosition.z);
+        crouchCeilingCheckPosition = new Vector2(originalCeilingCheckPosition.x, originalCeilingCheckPosition.y - 1.0f);
     }
 
     void Update()
@@ -30,7 +29,7 @@ public class PlayerCrouch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (PlayerVar.isCrouching)
+            if (player.isCrouching)
             {
                 StandUp();
             }
@@ -41,14 +40,19 @@ public class PlayerCrouch : MonoBehaviour
         }
     }
 
+    public void SetCrouching(bool crouching)
+    {
+        player.isCrouching = crouching; 
+    }
+
     private void Crouch()
     {
         if (!IsCeilingAbove())
         {
             ceilingCheck.localPosition = crouchCeilingCheckPosition;
-            PlayerVar.isCrouching = true;
+            player.isCrouching = true;
 
-            playerMov.SetCrouching(true);
+            SetCrouching(true);
         }
     }
 
@@ -57,9 +61,9 @@ public class PlayerCrouch : MonoBehaviour
         if (!IsCeilingAbove())
         {
             ceilingCheck.localPosition = originalCeilingCheckPosition;
-            PlayerVar.isCrouching = false;
+            player.isCrouching = false;
 
-            playerMov.SetCrouching(false);
+            SetCrouching(false);
         }
     }
 

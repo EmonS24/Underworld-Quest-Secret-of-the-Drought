@@ -569,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 419757825}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0.09, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2774,9 +2774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 6
-  jumpTime: 0.2
   fallMultiplier: 2.8
-  lowJumpMultiplier: 2.2
+  lowJumpMultiplier: 2
   groundCheck: {fileID: 419757826}
   groundLayer:
     serializedVersion: 2
@@ -2810,6 +2809,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e451df67885e24da85b39a99c7cfb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMove: 0
+  isJumping: 0
+  isGrounded: 0
+  isClimbing: 0
+  isCrouching: 0
 --- !u!61 &2052002552
 BoxCollider2D:
   m_ObjectHideFlags: 0

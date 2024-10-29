@@ -1,25 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float jumpForce;
-    private float jumpTimeCounter;
-    public float jumpTime;
     public float fallMultiplier;
     public float lowJumpMultiplier;
     public Transform groundCheck;
     public LayerMask groundLayer;
     public float groundCheckRadius = 0.1f;
-
+    private PlayerVar player;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = false; 
+        player = GetComponent<PlayerVar>();
     }
 
     void Update()
@@ -39,41 +36,20 @@ public class PlayerJump : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        if (PlayerVar.isGrounded && Input.GetKeyDown(KeyCode.Space) && !PlayerVar.isCrouching)
+        if (player.isGrounded && Input.GetKeyDown(KeyCode.Space) && !player.isCrouching)
         {
-            PlayerVar.isJumping = true;
-            jumpTimeCounter = jumpTime;
+            player.isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
-
-        // hold jump
-        if (Input.GetKeyDown(KeyCode.Space) && PlayerVar.isJumping)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                PlayerVar.isJumping = false;
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            PlayerVar.isJumping = false;
         }
     }
 
-
     public void CheckGrounded()
     {
-        PlayerVar.isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
+        player.isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
 
-        if (PlayerVar.isGrounded)
+        if (player.isGrounded)
         {
-            PlayerVar.isJumping = false;
+            player.isJumping = false;
         }
     }
 

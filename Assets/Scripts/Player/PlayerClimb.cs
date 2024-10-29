@@ -8,7 +8,7 @@ public class PlayerClimb : MonoBehaviour
     private Animator animator;
     [SerializeField] private Transform wallCheck; 
     [SerializeField] private Vector2 wallCheckSize; 
-    [SerializeField] private Vector2 wallCheckOffset;
+    [SerializeField] private Vector2 wallCheckOffset; 
     [SerializeField] private Vector2 offset1; 
     [SerializeField] private Vector2 offset2; 
     [SerializeField] private float climbDuration;
@@ -82,15 +82,13 @@ public class PlayerClimb : MonoBehaviour
         transform.position = climbOverPosition;
 
         // Reset climbing state
+        canGrabLedge = true;
         canClimb = false;
         isClimbing = false;
-        animator.SetBool("canClimb", false);
         rb.isKinematic = false; 
 
-        AllowLedgeGrab();
+        animator.SetBool("canClimb", false);
     }
-
-    private void AllowLedgeGrab() => canGrabLedge = true;
 
     public void CollisionCheck()
     {

@@ -4,20 +4,9 @@ using UnityEngine;
 
 public class PlayerVar : MonoBehaviour
 {
-    public static bool isMove;     
-    public static bool isJumping; 
-    public static bool isFalling;    
-    public static bool isGrabbing;   
-    public static bool isGrounded;   
-    public static bool isClimbing;  
-    public static bool isCrouching;   
-    public static bool isPushing;
-    public static bool isPulling;
-    
-    public static LayerMask groundLayer;   
-
-    private void Update()
-    {
-        
-    }
+    public bool isMove;     
+    public bool isJumping; 
+    public bool isGrounded;   
+    public bool isClimbing;  
+    public bool isCrouching; 
 }
