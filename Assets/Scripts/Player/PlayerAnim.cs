@@ -26,7 +26,7 @@ public class PlayerAnim : MonoBehaviour
         animator.SetBool("isMove", player.isMove);
         animator.SetBool("isJumping", player.isJumping);
         animator.SetBool("isGrounded", player.isGrounded);
-        animator.SetBool("isClimbing", player.isClimbing);
+        animator.SetBool("canClimb", player.canClimb);
         animator.SetBool("isCrouching", player.isCrouching);
     }
 }
