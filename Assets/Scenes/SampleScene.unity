@@ -1228,7 +1228,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  playerClimb: {fileID: 2052002561}
+  climb: {fileID: 2052002561}
   canDetected: 0
 --- !u!50 &1042703243
 Rigidbody2D:
@@ -2774,7 +2774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 6
-  fallMultiplier: 2.8
+  fallMultiplier: 0
   lowJumpMultiplier: 2
   groundCheck: {fileID: 419757826}
   groundLayer:
@@ -2813,6 +2813,7 @@ MonoBehaviour:
   isJumping: 0
   isGrounded: 0
   isClimbing: 0
+  canClimb: 0
   isCrouching: 0
 --- !u!61 &2052002552
 BoxCollider2D:
@@ -2947,7 +2948,7 @@ Transform:
   m_GameObject: {fileID: 2052002547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.77, y: 0.02, z: 0}
+  m_LocalPosition: {x: 7.03, y: 3.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3019,9 +3020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309dd5691550d3428a55fb07e96a3d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallCheck: {fileID: 1589090851}
-  wallCheckSize: {x: 0.3, y: 2.05}
-  wallCheckOffset: {x: 0, y: -0.1}
   offset1: {x: -0.34, y: -0.45}
   offset2: {x: 0.1, y: 1.2}
   climbDuration: 0.8
@@ -3029,7 +3027,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   ledgeDetected: 0
-  canClimb: 0
 --- !u!1 &2111568849
 GameObject:
   m_ObjectHideFlags: 0
