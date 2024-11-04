@@ -36,7 +36,7 @@ public class PlayerJump : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        if (player.isGrounded && Input.GetKeyDown(KeyCode.Space) && !player.isCrouching)
+        if (player.isGrounded && Input.GetKeyDown(KeyCode.Space) && !player.isCrouching && !player.isGrabbing)
         {
             player.isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

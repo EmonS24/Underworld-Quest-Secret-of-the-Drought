@@ -8,6 +8,7 @@ public class PlayerAnim : MonoBehaviour
     private PlayerVar player;
     private PlayerMov move;
 
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -28,5 +29,6 @@ public class PlayerAnim : MonoBehaviour
         animator.SetBool("isGrounded", player.isGrounded);
         animator.SetBool("canClimb", player.canClimb);
         animator.SetBool("isCrouching", player.isCrouching);
+        animator.SetBool("isGrabbing", player.isGrabbing);
     }
 }

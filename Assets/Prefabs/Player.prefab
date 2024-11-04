@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 2138239852737075216}
   - component: {fileID: 8615095447546152520}
   - component: {fileID: 5199695758121614387}
+  - component: {fileID: 368010246009034627}
   - component: {fileID: 3081074987785096950}
   m_Layer: 6
   m_Name: Player
@@ -66,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 2081545963284029668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.93, y: 0.24, z: 0}
+  m_LocalPosition: {x: 11.4, y: 3.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -217,6 +218,9 @@ MonoBehaviour:
   isClimbing: 0
   canClimb: 0
   isCrouching: 0
+  isGrabbing: 0
+  isPushing: 0
+  isPulling: 0
 --- !u!114 &4883676352936486667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +248,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 6
   crouchSpeed: 2
+  grabSpeed: 2
   allowMove: 1
 --- !u!114 &2138239852737075216
 MonoBehaviour:
@@ -301,6 +306,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   ledgeDetected: 0
+--- !u!114 &368010246009034627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081545963284029668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a6ab0030fd53641aad2c76d838545a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &3081074987785096950
 Animator:
   serializedVersion: 5

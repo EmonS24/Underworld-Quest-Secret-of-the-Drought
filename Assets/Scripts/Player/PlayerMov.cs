@@ -9,6 +9,7 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] public float walkSpeed;    
     [SerializeField] public float runSpeed;    
     [SerializeField] public float crouchSpeed; 
+    [SerializeField] public float grabSpeed; // Kecepatan khusus saat grabbing
     public bool allowMove = true;
     private PlayerVar player;
 
@@ -39,27 +40,27 @@ public class PlayerMov : MonoBehaviour
         player.isMove = moveInputH != 0;
     }
 
-    
     public float GetCurrentSpeed()
     {
-        float speed;
-        if (player.isCrouching)
+        if (player.isGrabbing) // Cek jika player sedang grabbing
         {
-            speed = crouchSpeed;
+            return grabSpeed; // Kembalikan kecepatan grabbing
+        }
+        else if (player.isCrouching)
+        {
+            return crouchSpeed; // Ambil kecepatan crouch dari PlayerVar
         }
         else if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = runSpeed;
+            return runSpeed; // Ambil kecepatan run dari PlayerVar
         }
-        else
-        {
-            speed = walkSpeed;
-        }
-        return speed;
+        return walkSpeed; // Ambil kecepatan walk dari PlayerVar
     }
 
     private void FlipSprite()
     {
+        if(!player.isGrabbing)
+        {
         if (moveInputH > 0)
         {
             transform.localScale = new Vector2(1f, transform.localScale.y);
@@ -67,6 +68,7 @@ public class PlayerMov : MonoBehaviour
         else if (moveInputH < 0)
         {
             transform.localScale = new Vector2(-1f, transform.localScale.y);
+        }
         }
     }
 }
