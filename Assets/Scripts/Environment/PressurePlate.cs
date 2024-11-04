@@ -6,11 +6,14 @@ public class PressurePlate : MonoBehaviour
 {
     public DoorController door; 
 
+    private int objectCount = 0; 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.CompareTag("Pushable"))
         {
-            door.OpenDoor();
+            objectCount++; 
+            door.OpenDoor(); 
         }
     }
 
@@ -18,7 +21,11 @@ public class PressurePlate : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.CompareTag("Pushable"))
         {
-            door.CloseDoor(); 
+            objectCount--; 
+            if (objectCount <= 0)
+            {
+                door.CloseDoor(); 
+            }
         }
     }
 }
