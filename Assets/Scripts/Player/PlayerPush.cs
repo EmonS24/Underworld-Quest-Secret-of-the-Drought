@@ -4,60 +4,100 @@ using UnityEngine;
 
 public class PlayerPushPull : MonoBehaviour
 {
-    private GameObject currentObject; // Objek yang sedang di-grab
-    private PushableObject pushableObject; // Komponen PushableObject
-    private Vector2 offset; // Offset posisi grab
-    private PlayerVar player; // Mengacu pada PlayerVar
+    private GameObject currentObject;
+    private Vector2 offset;
+    private PlayerVar player;
 
     void Start()
     {
-        player = GetComponent<PlayerVar>(); // Ambil komponen PlayerVar dari player
+        player = GetComponent<PlayerVar>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) // Menggunakan 'E' untuk grab
+        HandleGrab();
+    }
+
+    private void HandleGrab()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && player.isGrounded)
         {
             if (currentObject != null)
             {
-                player.isGrabbing = !player.isGrabbing; // Toggle grab state
-                pushableObject.SetKinematic(player.isGrabbing); // Set kinematic saat di-grab
+                player.isGrabbing = !player.isGrabbing;
+
+                Rigidbody2D rb = currentObject.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    if (player.isGrabbing)
+                    {
+                        rb.constraints = RigidbodyConstraints2D.FreezeRotation; 
+                    }
+                    else
+                    {
+                        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; 
+                        currentObject.transform.position = (Vector2)transform.position + offset; 
+                    }
+                }
             }
         }
-
         if (player.isGrabbing && currentObject != null)
         {
             MoveObject();
+        }
+        if (!player.isGrounded)
+        {
+            ReleaseGrab();
         }
     }
 
     private void MoveObject()
     {
-        // Pindahkan objek berdasarkan posisi pemain
-        currentObject.transform.position = (Vector2)transform.position + offset;
+        Rigidbody2D rb = currentObject.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Vector2 newPosition = (Vector2)transform.position + offset;
+            rb.MovePosition(newPosition);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Pushable")) // Pastikan objek yang di-grab memiliki tag "Pushable"
+        if (collision.CompareTag("Pushable"))
         {
             currentObject = collision.gameObject;
-            pushableObject = currentObject.GetComponent<PushableObject>(); // Ambil komponen PushableObject
-            
-            // Hitung offset agar objek berada di posisi yang tepat saat di-grab
             offset = (Vector2)(currentObject.transform.position - transform.position);
         }
+    }
+
+    private void ReleaseGrab()
+    {
+        if (currentObject != null)
+        {
+            Rigidbody2D rb = currentObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            }
+        }
+        player.isGrabbing = false;
+        currentObject = null;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Pushable"))
         {
-            currentObject = null; // Reset objek saat keluar dari trigger
-            if (player.isGrabbing) // Jika sedang grab, lepas objek
+            currentObject = null;
+            if (player.isGrabbing)
             {
                 player.isGrabbing = false;
-                pushableObject.SetKinematic(false); // Kembalikan ke mode normal
+
+                Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                }
             }
         }
     }

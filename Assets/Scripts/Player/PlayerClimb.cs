@@ -15,6 +15,7 @@ public class PlayerClimb : MonoBehaviour
     private bool canGrabLedge = true;
     private PlayerVar player;
     private PlayerMov move;
+    private bool isFacingRight;
 
     void Start()
     {
@@ -30,14 +31,24 @@ public class PlayerClimb : MonoBehaviour
 
     private void CheckForLedge()
     {
-        if (ledgeDetected && canGrabLedge && !player.isGrounded)
+        if (ledgeDetected && canGrabLedge && !player.isGrounded && !player.isGrabbing)
         {
             canGrabLedge = false;
 
             Vector2 ledgePosition = GetComponentInChildren<LedgeDetection>().transform.position;
 
-            climbBegunPosition = ledgePosition + offset1;
-            climbOverPosition = ledgePosition + offset2;
+            isFacingRight = transform.localScale.x > 0;
+
+            if (isFacingRight)
+            {
+                climbBegunPosition = ledgePosition + offset1;
+                climbOverPosition = ledgePosition + offset2;
+            }
+            else
+            {
+                climbBegunPosition = ledgePosition + new Vector2(-offset1.x, offset1.y);
+                climbOverPosition = ledgePosition + new Vector2(-offset2.x, offset2.y);
+            }
 
             player.canClimb = true; 
 
