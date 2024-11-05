@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walkk_0
+      name: walkk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f71979e9d7b93d409e2bf97eeb22722
-      internalID: 2199297
+      spriteID: b1fc846383d51774c8c5bf3f28ac2494
+      internalID: 650200137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walkk_1
+      name: walkk_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59a5881154101b940a9aced026615f54
-      internalID: 441347830
+      spriteID: 734eb3e861f3b1a4a8769983d853ecdb
+      internalID: 339164954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walkk_2
+      name: walkk_2
       rect:
         serializedVersion: 2
         x: 256
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 495b30d1c20915f4a937a4ea77963de2
-      internalID: -844160611
+      spriteID: e28081fb1b47f324da0ead7726e3ccb4
+      internalID: -1441384452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walkk_3
+      name: walkk_3
       rect:
         serializedVersion: 2
         x: 384
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18e0cece1436d664ba01863291478640
-      internalID: 772041362
+      spriteID: 98adf19bbba956e40bfa20084f0239e5
+      internalID: -1741477894
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Walkk_0: 2199297
-      Walkk_1: 441347830
-      Walkk_2: -844160611
-      Walkk_3: 772041362
+      walkk_0: 650200137
+      walkk_1: 339164954
+      walkk_2: -1441384452
+      walkk_3: -1741477894
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
