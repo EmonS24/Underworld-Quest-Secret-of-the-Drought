@@ -69,7 +69,7 @@ public class PlayerMov : MonoBehaviour
 
     private void UpdateStamina()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && moveInputH != 0 && stamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && moveInputH != 0 && stamina > 0 && !player.isCrouching && !player.isGrabbing)
         {
             stamina -= runCost * Time.deltaTime;
             if(stamina < 0) stamina = 0;
