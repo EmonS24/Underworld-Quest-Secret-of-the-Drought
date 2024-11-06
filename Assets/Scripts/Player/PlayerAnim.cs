@@ -25,7 +25,6 @@ public class PlayerAnim : MonoBehaviour
     {
         animator.SetFloat("speed", move.GetCurrentSpeed());
         animator.SetBool("isMove", player.isMove);
-        animator.SetBool("isJumping", player.isJumping);
         animator.SetBool("isGrounded", player.isGrounded);
         animator.SetBool("canClimb", player.canClimb);
         animator.SetBool("isCrouching", player.isCrouching);
