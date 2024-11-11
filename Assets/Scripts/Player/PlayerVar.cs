@@ -13,4 +13,5 @@ public class PlayerVar : MonoBehaviour
     public bool isGrabbing = false; 
     public bool isPushing; 
     public bool isPulling; 
+    public bool isDeath = false;
 }

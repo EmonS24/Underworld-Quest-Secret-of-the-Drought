@@ -14,6 +14,11 @@ public class PlayerMov : MonoBehaviour
     [SerializeField] public float grabSpeed;
     public bool allowMove = true;
     private PlayerVar player;
+    public float KBForce;
+    public float KBCounter;
+    public float KBCTotalTime;
+
+    public bool KnockFromRight;
 
     [Header("Stamina Settings")]
     public Image staminaBar; 
@@ -43,11 +48,28 @@ public class PlayerMov : MonoBehaviour
         moveInputH = Input.GetAxisRaw("Horizontal");
 
         float speed = GetCurrentSpeed();
-        rb.velocity = new Vector2(moveInputH * speed, rb.velocity.y);
 
         FlipSprite();
 
         player.isMove = moveInputH != 0;
+        
+        if (KBCounter <= 0)
+        {
+            rb.velocity = new Vector2(moveInputH * speed, rb.velocity.y);
+        }
+        else
+        {
+            if (KnockFromRight)
+            {
+                rb.velocity = new Vector2(-KBForce, rb.velocity.y);
+            }
+            if (!KnockFromRight)
+            {
+                rb.velocity = new Vector2(KBForce, rb.velocity.y);
+            }
+
+            KBCounter -= Time.deltaTime;
+        }
     }
 
     public float GetCurrentSpeed()
