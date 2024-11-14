@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "7piece.sln"
+    "dotnet.defaultSolution": "Underworld-Quest-Secret-of-the-Drought.sln"
 }
