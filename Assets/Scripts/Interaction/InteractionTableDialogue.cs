@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class InteractionTableDialogue : MonoBehaviour
 {
     [SerializeField] private GameObject ui;
-    
+
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log(message:"Player Interact!");
+        Debug.Log(message:"Player dalam interaksi!");
         ui.SetActive(false);
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(message:"Object Terdeteksi");
