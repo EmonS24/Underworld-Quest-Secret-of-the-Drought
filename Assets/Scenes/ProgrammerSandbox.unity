@@ -1755,7 +1755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2b39482ae8f7045a99b975b964025c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 59904801}
 --- !u!1 &796030908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,6 +1858,14 @@ PrefabInstance:
     - target: {fileID: 5089201371999115231, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: m_FlipX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089201371999115231, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 34028684, guid: b2e17059da048b9449ca0a83a9485172, type: 3}
+    - target: {fileID: 5089201371999115231, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5199695758121614387, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: climbDuration

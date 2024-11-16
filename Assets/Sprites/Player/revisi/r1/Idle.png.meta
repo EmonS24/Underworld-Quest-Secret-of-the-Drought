@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 03f3cbdc433f62142b197a23bf4b894d
+guid: b2e17059da048b9449ca0a83a9485172
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: run_0
+      name: Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91c7ffb07788d5d44af5bdf597610679
-      internalID: -363117393
+      spriteID: c352e99ad345b9f41beb9426050556a7
+      internalID: 34028684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_1
+      name: Idle_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,29 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 639ce86f41808c341b42e3b134e60b3a
-      internalID: -1805448652
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: run_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c282f3878876b0140847559b582fe487
-      internalID: 192674513
+      spriteID: 8aad3c4eb6ba0f54691a0b652342fb7b
+      internalID: -2089222929
       vertices: []
       indices: 
       edges: []
@@ -183,9 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      run_0: -363117393
-      run_1: -1805448652
-      run_2: 192674513
+      Idle_0: 34028684
+      Idle_1: -2089222929
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
