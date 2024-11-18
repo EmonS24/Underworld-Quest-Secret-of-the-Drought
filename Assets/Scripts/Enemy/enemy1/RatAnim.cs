@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnim : MonoBehaviour
+public class RatAnim : MonoBehaviour
 {
     private Animator animator;
-    private EnemyVar enemy;
+    private RatVar enemy;
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        enemy = GetComponent<EnemyVar>();
+        enemy = GetComponent<RatVar>();
     }
 
     void Update()

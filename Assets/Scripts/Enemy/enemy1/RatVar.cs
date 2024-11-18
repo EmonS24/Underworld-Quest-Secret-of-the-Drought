@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyVar : MonoBehaviour
+public class RatVar : MonoBehaviour
 {
     public bool isMove;     
     public bool isAttack;

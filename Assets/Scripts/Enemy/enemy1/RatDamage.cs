@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamage : MonoBehaviour
+public class RatDamage : MonoBehaviour
 {
     public float damage;
     public PlayerHealth playerHp;
     public PlayerMov playerMov;
-    private EnemyVar enemy;
+    private RatVar enemy;
 
     void Start()
     {
-        enemy = GetComponent<EnemyVar>();
+        enemy = GetComponent<RatVar>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision) 
