@@ -2985,6 +2985,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4949509032998426102, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
+      propertyPath: chargeRate
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949509032998426102, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 1796447102}

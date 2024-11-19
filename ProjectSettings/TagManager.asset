@@ -49,9 +49,6 @@ TagManager:
   - name: Sky
     uniqueID: 1965238903
     locked: 0
-  - name: Cloud
-    uniqueID: 2249166665
-    locked: 0
   - name: Siluet
     uniqueID: 1921017161
     locked: 0
@@ -69,4 +66,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 4085200433
+    locked: 0
+  - name: Cloud
+    uniqueID: 2249166665
     locked: 0

@@ -147,14 +147,14 @@ public class PlayerMov : MonoBehaviour
 
     private IEnumerator RechargeStamina()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         while(stamina < maxStamina)
         {
             stamina += chargeRate / 10f;
             if(stamina > maxStamina) stamina = maxStamina;
             staminaBar.fillAmount = stamina / maxStamina;
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
