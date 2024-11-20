@@ -9,7 +9,6 @@ TagManager:
   - Pushable
   - Audio
   - Real
-
   layers:
   - Default
   - TransparentFX
@@ -17,10 +16,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
   - Ground
+  - Player
   - Pushable
-  - Cloud
+  - 
   - 
   - 
   - 
@@ -48,29 +47,29 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Sky
-    uniqueID: 1965238903
+    uniqueID: 2334991367
     locked: 0
   - name: Siluet
-    uniqueID: 1921017161
+    uniqueID: 3934100411
     locked: 0
   - name: Background
-    uniqueID: 2298430525
+    uniqueID: 3392631701
     locked: 0
   - name: House
-    uniqueID: 912369303
+    uniqueID: 2728082391
     locked: 0
   - name: Ground
-    uniqueID: 2188278291
+    uniqueID: 3043946067
     locked: 0
   - name: Player
-    uniqueID: 173857743
+    uniqueID: 3060759495
     locked: 0
   - name: Enemy
-    uniqueID: 2485881809
+    uniqueID: 1025932771
     locked: 0
   - name: Foreground
-    uniqueID: 4085200433
+    uniqueID: 277642349
     locked: 0
   - name: Cloud
-    uniqueID: 2249166665
+    uniqueID: 2050666683
     locked: 0
