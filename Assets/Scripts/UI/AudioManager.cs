@@ -9,12 +9,12 @@ public class AudioManagerUI : MonoBehaviour
     [SerializeField] AudioSource SFXSource;
 
     [Header("----------Audio Clip ----------")]
-    public AudioClip background;
+    public AudioClip backgroundUI;
     public AudioClip buttonClick;
 
     private void Start()
     {
-        musicSource.clip = background;
+        musicSource.clip = backgroundUI;
         musicSource.Play();
     }
 
