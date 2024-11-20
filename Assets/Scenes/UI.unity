@@ -2014,7 +2014,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1111891399}
   m_HandleRect: {fileID: 938227766}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.392
