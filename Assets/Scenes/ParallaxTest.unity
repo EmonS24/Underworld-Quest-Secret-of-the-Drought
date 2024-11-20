@@ -153,6 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1194960480}
   SFXSource: {fileID: 1971871224}
+  backgroundUI: {fileID: 0}
+  buttonClick: {fileID: 0}
   footsteps: {fileID: 8300000, guid: d30f0ed1d3a38794ba244e88d5c688be, type: 3}
   jumpStep: {fileID: 8300000, guid: 878163290e01aa74cb053c3551271b64, type: 3}
   jumpGround: {fileID: 8300000, guid: f5e1ac41551b0cf428cf0f6f847b47f2, type: 3}
@@ -595,7 +597,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 173857743
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -83642260, guid: ff479105a3cbcb74281a2706c2226a66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -696,6 +698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2138239852737075216, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4949509032998426102, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: staminaBar
       value: 
@@ -707,6 +713,10 @@ PrefabInstance:
     - target: {fileID: 5089201371999115231, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: m_SortingLayerID
       value: 173857743
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199695758121614387, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5532776128816519617, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -755,6 +765,10 @@ PrefabInstance:
     - target: {fileID: 6650992630020913207, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
       propertyPath: m_Offset.y
       value: -0.038672328
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615095447546152520, guid: f6063abf760a79c4b9fe2f60e9c54ec6, type: 3}
+      propertyPath: ceilingLayer.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -971,7 +985,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 173857743
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1160850908, guid: 54891ece13fd5664f8bb7e04ec7984c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1390,7 +1404,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 173857743
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1086236374, guid: fa276dc9131aaed48b6a4eda7aa4b097, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2252,7 +2266,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 173857743
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1208575067, guid: 5d31ed52cfc439a43bf36eabf0234748, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
