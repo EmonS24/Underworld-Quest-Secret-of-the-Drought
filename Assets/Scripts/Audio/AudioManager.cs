@@ -9,11 +9,18 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioSource SFXSource;
 
     [Header("---- Audio Clip ----")]
+        public AudioClip backgroundUI;
+    public AudioClip buttonClick;
     public AudioClip footsteps;
     public AudioClip jumpStep;
     public AudioClip jumpGround;
 
-
+    
+    private void Start()
+    {
+        musicSource.clip = backgroundUI;
+        musicSource.Play();
+    }
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
