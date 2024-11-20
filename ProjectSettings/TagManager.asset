@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Pushable
   - Audio
+  - Real
+
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Player
   - Ground
   - Pushable
-  - 
+  - Cloud
   - 
   - 
   - 
@@ -44,4 +46,31 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Sky
+    uniqueID: 1965238903
+    locked: 0
+  - name: Siluet
+    uniqueID: 1921017161
+    locked: 0
+  - name: Background
+    uniqueID: 2298430525
+    locked: 0
+  - name: House
+    uniqueID: 912369303
+    locked: 0
+  - name: Ground
+    uniqueID: 2188278291
+    locked: 0
+  - name: Player
+    uniqueID: 173857743
+    locked: 0
+  - name: Enemy
+    uniqueID: 2485881809
+    locked: 0
+  - name: Foreground
+    uniqueID: 4085200433
+    locked: 0
+  - name: Cloud
+    uniqueID: 2249166665
     locked: 0

@@ -50,8 +50,8 @@ GameObject:
   - component: {fileID: 8615095447546152520}
   - component: {fileID: 5199695758121614387}
   - component: {fileID: 368010246009034627}
+  - component: {fileID: 627921922633382535}
   - component: {fileID: 3081074987785096950}
-  - component: {fileID: 2868000884247328014}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -118,12 +118,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 500
-  m_Sprite: {fileID: 397516997, guid: b0bdab8eff957394bbdf61cbc4c79e44, type: 3}
+  m_Sprite: {fileID: 34028684, guid: b2e17059da048b9449ca0a83a9485172, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.266667, y: 4.266667}
+  m_Size: {x: 4.266667, y: 3.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -188,18 +188,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0044831634, y: -0.060052752}
+  m_Offset: {x: -0.0044831634, y: -0.002299428}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.266667, y: 4.266667}
-    newSize: {x: 4.266667, y: 4.266667}
+    oldSize: {x: 4.266667, y: 3.9}
+    newSize: {x: 4.266667, y: 3.9}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8327445, y: 2.402321}
+  m_Size: {x: 0.8327445, y: 2.2868145}
   m_EdgeRadius: 0
 --- !u!114 &4977850871676926157
 MonoBehaviour:
@@ -252,9 +252,9 @@ MonoBehaviour:
   crouchSpeed: 2
   grabSpeed: 2
   allowMove: 1
-  KBForce: 0
+  KBForce: 10
   KBCounter: 0
-  KBCTotalTime: 0
+  KBCTotalTime: 0.2
   KnockFromRight: 0
   staminaBar: {fileID: 0}
   stamina: 100
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ceilingCheck: {fileID: 1830050363663605203}
-  ceilingCheckDistance: 0.2
+  ceilingCheckDistance: 0.7
   ceilingLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset1: {x: -0.34, y: -0.45}
   offset2: {x: 0.1, y: 1.2}
-  climbDuration: 0.8
+  climbDuration: 0.6
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -329,6 +329,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a6ab0030fd53641aad2c76d838545a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &627921922633382535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081545963284029668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e796d31c195a44aab54470fedd30f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
+  healthBar: {fileID: 0}
 --- !u!95 &3081074987785096950
 Animator:
   serializedVersion: 5
@@ -350,19 +365,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2868000884247328014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2081545963284029668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea2b39482ae8f7045a99b975b964025c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ui: {fileID: 0}
 --- !u!1 &3949715775163699563
 GameObject:
   m_ObjectHideFlags: 0

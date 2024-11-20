@@ -13,10 +13,16 @@ public class PlayerJump : MonoBehaviour
     public float groundCheckRadius = 0.1f;
     private PlayerVar player;
 
+    // AudioManager reference
+    private AudioManager audioManager;
+
+    private bool wasGrounded = true; // Untuk mendeteksi transisi dari udara ke tanah
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<PlayerVar>();
+        audioManager = FindObjectOfType<AudioManager>(); // Mendapatkan referensi ke AudioManager
     }
 
     void Update()
@@ -40,17 +46,32 @@ public class PlayerJump : MonoBehaviour
         {
             player.isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+            // Play "jump step" sound
+            if (audioManager != null)
+            {
+                audioManager.PlaySFX(audioManager.jumpStep);
+            }
         }
     }
 
     public void CheckGrounded()
     {
-        player.isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
+        bool currentlyGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
+        player.isGrounded = currentlyGrounded;
 
-        if (player.isGrounded)
+        if (currentlyGrounded && !wasGrounded)
         {
+            // Play "jump ground" sound
+            if (audioManager != null)
+            {
+                audioManager.PlaySFX(audioManager.jumpGround);
+            }
+
             player.isJumping = false;
         }
+
+        wasGrounded = currentlyGrounded;
     }
 
     private void OnDrawGizmos()
