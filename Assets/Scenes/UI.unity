@@ -748,10 +748,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 395617986}
   m_HandleRect: {fileID: 1510252486}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.392
+  m_Value: 0.508
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2973,7 +2973,7 @@ AudioSource:
   m_GameObject: {fileID: 1860054540}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1497676466510815725, guid: 77e733f35f3e9ee4dbfd28760e047241, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -3235,7 +3235,7 @@ AudioSource:
   m_GameObject: {fileID: 1982736957}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6593004926757903304, guid: 77e733f35f3e9ee4dbfd28760e047241, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -3391,7 +3391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0793129d794e6247bc13c98e63f1e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMixer: {fileID: 0}
+  myMixer: {fileID: 24100000, guid: 77e733f35f3e9ee4dbfd28760e047241, type: 2}
   musicSlider: {fileID: 527244731}
   SFXSlider: {fileID: 1085132097}
 --- !u!114 &1988946276
