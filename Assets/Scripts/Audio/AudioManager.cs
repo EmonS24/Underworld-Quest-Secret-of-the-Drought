@@ -11,13 +11,10 @@ public class AudioManager : MonoBehaviour
     [Header("---- Audio Clip ----")]
 
     public AudioClip backgroundUI;
-
     public AudioClip buttonClick;
     public AudioClip footsteps;
     public AudioClip jumpStep;
     public AudioClip jumpGround;
-
-
     
     private void Start()
     {

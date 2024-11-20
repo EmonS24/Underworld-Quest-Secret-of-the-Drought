@@ -2914,24 +2914,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-
---- !u!114 &1850922947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850922946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81986e3398228dc4cb1d35d75677a94d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSource: {fileID: 1860054541}
-  SFXSource: {fileID: 1982736958}
-  backgroundUI: {fileID: 0}
-  buttonClick: {fileID: 8300000, guid: 854ffcc793fea8841aacfc375dee6353, type: 3}
-
 --- !u!4 &1850922948
 Transform:
   m_ObjectHideFlags: 0
