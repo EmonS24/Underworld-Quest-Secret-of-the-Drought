@@ -2928,7 +2928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1860054541}
   SFXSource: {fileID: 1982736958}
-  background: {fileID: 8300000, guid: c34497c41ea077b4b8e6262497be82fc, type: 3}
+  backgroundUI: {fileID: 0}
   buttonClick: {fileID: 8300000, guid: 854ffcc793fea8841aacfc375dee6353, type: 3}
 --- !u!4 &1850922948
 Transform:
