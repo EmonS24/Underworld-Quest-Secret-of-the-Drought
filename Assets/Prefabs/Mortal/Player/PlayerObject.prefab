@@ -52,8 +52,8 @@ GameObject:
   - component: {fileID: 368010246009034627}
   - component: {fileID: 627921922633382535}
   - component: {fileID: 3081074987785096950}
-  m_Layer: 6
-  m_Name: Player
+  m_Layer: 7
+  m_Name: PlayerObject
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 2081545963284029668}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.19, y: 0.55, z: 0}
+  m_LocalPosition: {x: -2.110382, y: -2.4974866, z: -0.064491585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -115,8 +115,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1234207801
+  m_SortingLayer: 6
   m_SortingOrder: 500
   m_Sprite: {fileID: 34028684, guid: b2e17059da048b9449ca0a83a9485172, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -260,7 +260,7 @@ MonoBehaviour:
   stamina: 100
   maxStamina: 100
   runCost: 25
-  chargeRate: 33
+  chargeRate: 40
 --- !u!114 &2138239852737075216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1293897291444766285}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 320
   groundCheckRadius: 0.3
 --- !u!114 &8615095447546152520
 MonoBehaviour:
@@ -297,7 +297,7 @@ MonoBehaviour:
   ceilingCheckDistance: 0.7
   ceilingLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
 --- !u!114 &5199695758121614387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   climbDuration: 0.6
   groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 320
   ledgeDetected: 0
 --- !u!114 &368010246009034627
 MonoBehaviour:
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 8208711812663537959}
   - component: {fileID: 2540336621798934210}
   - component: {fileID: 7521478811460479170}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ledgeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ MonoBehaviour:
   radius: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 320
   climb: {fileID: 5199695758121614387}
   canDetected: 0
 --- !u!61 &2540336621798934210
