@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RatAnim : MonoBehaviour
+public class LeafhopperAnim : MonoBehaviour
 {
     private Animator animator;
-    private RatVar enemy;
+    private LeafhopperVar Leafhopper;
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        enemy = GetComponent<RatVar>();
+        Leafhopper = GetComponent<LeafhopperVar>();
     }
 
     void Update()
@@ -21,7 +21,7 @@ public class RatAnim : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        animator.SetBool("isMove", enemy.isMove);
-        animator.SetBool("isAttack", enemy.isAttack);
+        animator.SetBool("isMove", Leafhopper.isMove);
+        animator.SetBool("isAttack", Leafhopper.isAttack);
     }
 }

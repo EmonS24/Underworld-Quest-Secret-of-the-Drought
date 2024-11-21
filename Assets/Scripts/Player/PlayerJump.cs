@@ -13,16 +13,15 @@ public class PlayerJump : MonoBehaviour
     public float groundCheckRadius = 0.1f;
     private PlayerVar player;
 
-    // AudioManager reference
     private AudioManager audioManager;
 
-    private bool wasGrounded = true; // Untuk mendeteksi transisi dari udara ke tanah
+    private bool wasGrounded = true; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<PlayerVar>();
-        audioManager = FindObjectOfType<AudioManager>(); // Mendapatkan referensi ke AudioManager
+        audioManager = FindObjectOfType<AudioManager>(); 
     }
 
     void Update()
@@ -47,7 +46,6 @@ public class PlayerJump : MonoBehaviour
             player.isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
-            // Play "jump step" sound
             if (audioManager != null)
             {
                 audioManager.PlaySFX(audioManager.jumpStep);
@@ -62,7 +60,6 @@ public class PlayerJump : MonoBehaviour
 
         if (currentlyGrounded && !wasGrounded)
         {
-            // Play "jump ground" sound
             if (audioManager != null)
             {
                 audioManager.PlaySFX(audioManager.jumpGround);
