@@ -5,54 +5,62 @@ using UnityEngine;
 public class LeafhopperMov : MonoBehaviour
 {
     private LeafhopperVar Leafhopper;
-    private PlayerVar player; 
+    private PlayerVar player;
     public Transform[] patrolPoints;
     public float chaseSpeed;
     public float moveSpeed;
     public int patrolDestination;
-    public float chaseDistance;
-    public float distanceToPlayer;
-    public float stopChaseDistance;
+
+    public Transform detectionArea;
+    public Vector2 detectionSize;
+    public LayerMask playerLayer;
 
     void Start()
     {
         Leafhopper = GetComponent<LeafhopperVar>();
-        player = FindObjectOfType<PlayerVar>(); 
+        player = FindObjectOfType<PlayerVar>();
     }
 
     void Update()
     {
-        distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        bool playerInDetection = Physics2D.OverlapBox(detectionArea.position, detectionSize, 0, playerLayer);
 
         if (Leafhopper.isChasing)
         {
-            if (distanceToPlayer > stopChaseDistance || player.isDeath)
+            if (!playerInDetection || player.isDeath)
             {
                 Leafhopper.isChasing = false;
             }
             else
             {
-                FlipSprite(player.transform.position.x);
-                if (transform.position.x > player.transform.position.x)
-                {
-                    transform.position += Vector3.left * chaseSpeed * Time.deltaTime;
-                    Leafhopper.isMove = true;
-                }
-                else if (transform.position.x < player.transform.position.x)
-                {
-                    transform.position += Vector3.right * chaseSpeed * Time.deltaTime;
-                    Leafhopper.isMove = true;
-                }
+                ChasePlayer();
             }
         }
         else
         {
-            if (distanceToPlayer < chaseDistance && !player.isDeath)
+            if (playerInDetection && !player.isDeath)
             {
                 Leafhopper.isChasing = true;
             }
+            else
+            {
+                Patrol();
+            }
+        }
+    }
 
-            Patrol();
+    private void ChasePlayer()
+    {
+        FlipSprite(player.transform.position.x);
+        if (transform.position.x > player.transform.position.x)
+        {
+            transform.position += Vector3.left * chaseSpeed * Time.deltaTime;
+            Leafhopper.isMove = true;
+        }
+        else if (transform.position.x < player.transform.position.x)
+        {
+            transform.position += Vector3.right * chaseSpeed * Time.deltaTime;
+            Leafhopper.isMove = true;
         }
     }
 
@@ -74,11 +82,17 @@ public class LeafhopperMov : MonoBehaviour
     {
         if (targetX < transform.position.x)
         {
-            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z); 
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
         else if (targetX > transform.position.x)
         {
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(detectionArea.position, detectionSize);
     }
 }
