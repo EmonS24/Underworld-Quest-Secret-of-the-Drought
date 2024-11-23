@@ -26,16 +26,10 @@ public class PlayerMov : MonoBehaviour
     public float chargeRate;
     private Coroutine recharge;
 
-    private AudioManager audioManager;
-
-    private float stepTimer;
-    private float stepInterval = 0.5f;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<PlayerVar>();
-        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -54,32 +48,9 @@ public class PlayerMov : MonoBehaviour
 
         float speed = GetCurrentSpeed();
 
-        if (speed == runSpeed)
-        {
-            stepInterval = 0.3f;
-        }
-        else if (speed == walkSpeed)
-        {
-            stepInterval = 0.4f;
-        }
-        else
-        {
-            stepInterval = 0.7f;
-        }
-
         FlipSprite();
 
         player.isMove = moveInputH != 0;
-
-        if (player.isMove && audioManager != null && !audioManager.SFXSource.isPlaying && player.isGrounded)
-        {
-            stepTimer -= Time.deltaTime;
-            if (stepTimer <= 0f)
-            {
-                audioManager.PlaySFX(audioManager.footsteps);
-                stepTimer = stepInterval;
-            }
-        }
 
         if (KBCounter <= 0)
         {

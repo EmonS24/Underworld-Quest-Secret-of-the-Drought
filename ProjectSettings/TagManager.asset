@@ -9,6 +9,7 @@ TagManager:
   - Pushable
   - Audio
   - Real
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - Player
   - Pushable
   - Enemy
-  - 
-  - 
-  - 
+  - Cloud
+  - InvisibleWall
+  - Npc
   - 
   - 
   - 
@@ -49,11 +50,14 @@ TagManager:
   - name: Sky
     uniqueID: 2334991367
     locked: 0
-  - name: Siluet
-    uniqueID: 3934100411
+  - name: Cloud
+    uniqueID: 2050666683
     locked: 0
   - name: Background
     uniqueID: 3392631701
+    locked: 0
+  - name: Siluet
+    uniqueID: 3934100411
     locked: 0
   - name: House
     uniqueID: 2728082391
@@ -69,7 +73,4 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 277642349
-    locked: 0
-  - name: Cloud
-    uniqueID: 2050666683
     locked: 0
