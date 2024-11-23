@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("---- Audio Clip ----")]
 
-    public AudioClip backgroundUI;
+    public AudioClip background;
 
     public AudioClip buttonClick;
     public AudioClip footsteps;
@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     
     private void Start()
     {
-        musicSource.clip = backgroundUI;
+        musicSource.clip = background;
         musicSource.Play();
     }
 
