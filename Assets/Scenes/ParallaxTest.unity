@@ -2542,6 +2542,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -134.27682
       objectReference: {fileID: 0}
+    - target: {fileID: 7532456700745994249, guid: d3bad1314c3576e4fbf35de564eb187c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532456700745994249, guid: d3bad1314c3576e4fbf35de564eb187c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532456700745994249, guid: d3bad1314c3576e4fbf35de564eb187c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532456700745994249, guid: d3bad1314c3576e4fbf35de564eb187c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8717317931238095192, guid: d3bad1314c3576e4fbf35de564eb187c, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -3145,6 +3161,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6650992630020913207, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: m_Size.y
+      value: 2.3523405
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650992630020913207, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.035062432
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3285,6 +3309,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1683030977354360666, guid: b60b03fb46c21d643a4f8bea2669663c, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683030977354360666, guid: b60b03fb46c21d643a4f8bea2669663c, type: 3}
+      propertyPath: m_Volume
+      value: 0.593
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683030977354360666, guid: b60b03fb46c21d643a4f8bea2669663c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1757763445545911775, guid: b60b03fb46c21d643a4f8bea2669663c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.8
