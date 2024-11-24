@@ -1,36 +1,72 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
+    private Vector2 startPos;
     private Transform currentCheckpoint;
-    private PlayerHealth health;
     private PlayerVar player;
+    private PlayerHealth health;
 
-    private void Awake()
+    public GameObject respawnPanel; 
+    public float respawnDelay; 
+
+    private void Start()
     {
-        health = GetComponent<PlayerHealth>();
         player = GetComponent<PlayerVar>();
+        health = GetComponent<PlayerHealth>();
+        startPos = transform.position;
+        respawnPanel.SetActive(false);
     }
 
-    public void CheckRespawn()
+    private void Update()
     {
-        transform.position = currentCheckpoint.position;
-        health.Respawn();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) 
-    {
-        if (collision.transform.tag == "Checkpoint")
+        if (player.isDeath && !respawnPanel.activeSelf)
         {
-            currentCheckpoint = collision.transform;
+            StartCoroutine(HandleDeathSequence()); 
+        }
+
+        if (respawnPanel.activeSelf && Input.anyKeyDown)
+        {
+            CheckRespawn(); 
+        }
+    }
+
+    private IEnumerator HandleDeathSequence()
+    {
+        yield return new WaitForSeconds(respawnDelay); 
+        ShowRespawnPanel(); 
+    }
+
+    private void ShowRespawnPanel()
+    {
+        respawnPanel.SetActive(true);
+    }
+
+    private void CheckRespawn()
+    {
+        health.Respawn(); 
+        // Tentukan posisi respawn
+        if (currentCheckpoint != null)
+        {
+            transform.position = currentCheckpoint.position;
+        }
+        else
+        {
+            transform.position = startPos;
+        }
+
+        respawnPanel.SetActive(false); 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Checkpoint"))
+        {
+            currentCheckpoint = collision.transform; 
             collision.GetComponent<Collider2D>().enabled = false;
-            Light checkpointLight = collision.GetComponentInChildren<Light>(); // Asumsikan ada child light pada checkpoint
-            if (checkpointLight != null)
-            {
-                checkpointLight.enabled = true;
-            }
+
+            Debug.Log("Checkpoint: " + currentCheckpoint.position);
         }
     }
 }
