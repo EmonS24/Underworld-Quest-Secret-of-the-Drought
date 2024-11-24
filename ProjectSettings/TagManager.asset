@@ -53,6 +53,15 @@ TagManager:
   - name: Cloud
     uniqueID: 2050666683
     locked: 0
+  - name: Background
+    uniqueID: 3392631701
+    locked: 0
+  - name: Siluet
+    uniqueID: 3934100411
+    locked: 0
+  - name: pxGrass2
+    uniqueID: 2915529291
+    locked: 0
   - name: PowerPole
     uniqueID: 4155823917
     locked: 0
@@ -68,17 +77,8 @@ TagManager:
   - name: Barn
     uniqueID: 3314997841
     locked: 0
-  - name: pxGrass2
-    uniqueID: 2915529291
-    locked: 0
   - name: Grass1
     uniqueID: 2925198765
-    locked: 0
-  - name: Background
-    uniqueID: 3392631701
-    locked: 0
-  - name: Siluet
-    uniqueID: 3934100411
     locked: 0
   - name: Ground
     uniqueID: 3043946067
