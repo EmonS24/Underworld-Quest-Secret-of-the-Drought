@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 941348418}
   - component: {fileID: 941348417}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CutsceneVideo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
