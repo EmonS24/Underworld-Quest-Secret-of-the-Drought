@@ -17,6 +17,7 @@ public class PlayerRespawn : MonoBehaviour
         health = GetComponent<PlayerHealth>();
         startPos = transform.position;
         respawnPanel.SetActive(false);
+        LoadCheckpoint();
     }
 
     private void Update()
@@ -35,18 +36,12 @@ public class PlayerRespawn : MonoBehaviour
     private IEnumerator HandleDeathSequence()
     {
         yield return new WaitForSeconds(respawnDelay); 
-        ShowRespawnPanel(); 
-    }
-
-    private void ShowRespawnPanel()
-    {
         respawnPanel.SetActive(true);
     }
 
     private void CheckRespawn()
     {
         health.Respawn(); 
-        // Tentukan posisi respawn
         if (currentCheckpoint != null)
         {
             transform.position = currentCheckpoint.position;
@@ -65,8 +60,28 @@ public class PlayerRespawn : MonoBehaviour
         {
             currentCheckpoint = collision.transform; 
             collision.GetComponent<Collider2D>().enabled = false;
+            PlayerPrefs.SetFloat("CheckpointX", currentCheckpoint.position.x);
+            PlayerPrefs.SetFloat("CheckpointY", currentCheckpoint.position.y);
 
             Debug.Log("Checkpoint: " + currentCheckpoint.position);
+        }
+    }
+
+    private void LoadCheckpoint()
+    {
+        if (PlayerPrefs.HasKey("CheckpointX") && PlayerPrefs.HasKey("CheckpointY"))
+        {
+            float x = PlayerPrefs.GetFloat("CheckpointX");
+            float y = PlayerPrefs.GetFloat("CheckpointY");
+
+            currentCheckpoint = new GameObject("LoadedCheckpoint").transform;
+            currentCheckpoint.position = new Vector2(x, y);
+
+            transform.position = currentCheckpoint.position;
+        }
+        else
+        {
+            Debug.Log("No checkpoint found, starting from default position.");
         }
     }
 }
