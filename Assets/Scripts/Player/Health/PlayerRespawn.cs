@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    private Vector2 startPos;
-    private Transform currentCheckpoint;
     private PlayerVar player;
     private PlayerHealth health;
+    private Vector2 startPos;
 
-    public GameObject respawnPanel; 
-    public float respawnDelay; 
+    public GameObject respawnPanel;
+    public float respawnDelay;
 
     private void Start()
     {
@@ -24,64 +24,59 @@ public class PlayerRespawn : MonoBehaviour
     {
         if (player.isDeath && !respawnPanel.activeSelf)
         {
-            StartCoroutine(HandleDeathSequence()); 
+            StartCoroutine(HandleDeathSequence());
         }
 
         if (respawnPanel.activeSelf && Input.anyKeyDown)
         {
-            CheckRespawn(); 
+            CheckRespawn();
         }
     }
 
     private IEnumerator HandleDeathSequence()
     {
-        yield return new WaitForSeconds(respawnDelay); 
+        yield return new WaitForSeconds(respawnDelay);
         respawnPanel.SetActive(true);
     }
 
     private void CheckRespawn()
     {
-        health.Respawn(); 
-        if (currentCheckpoint != null)
+        health.Respawn();
+        CheckpointData checkpointData = FindObjectOfType<CheckpointManager>().LoadCheckpoint();
+        if (checkpointData != null)
         {
-            transform.position = currentCheckpoint.position;
+            transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
         }
         else
         {
             transform.position = startPos;
         }
 
-        respawnPanel.SetActive(false); 
+        respawnPanel.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Checkpoint"))
         {
-            currentCheckpoint = collision.transform; 
-            collision.GetComponent<Collider2D>().enabled = false;
-            PlayerPrefs.SetFloat("CheckpointX", currentCheckpoint.position.x);
-            PlayerPrefs.SetFloat("CheckpointY", currentCheckpoint.position.y);
-
-            Debug.Log("Checkpoint: " + currentCheckpoint.position);
+            Vector2 checkpointPosition = collision.transform.position;
+            string sceneName = SceneManager.GetActiveScene().name;
+            FindObjectOfType<CheckpointManager>().SaveCheckpoint(sceneName, checkpointPosition);
+            Debug.Log("Checkpoint saved at: " + checkpointPosition);
         }
     }
 
     private void LoadCheckpoint()
     {
-        if (PlayerPrefs.HasKey("CheckpointX") && PlayerPrefs.HasKey("CheckpointY"))
+        CheckpointData checkpointData = FindObjectOfType<CheckpointManager>().LoadCheckpoint();
+
+        if (checkpointData != null)
         {
-            float x = PlayerPrefs.GetFloat("CheckpointX");
-            float y = PlayerPrefs.GetFloat("CheckpointY");
-
-            currentCheckpoint = new GameObject("LoadedCheckpoint").transform;
-            currentCheckpoint.position = new Vector2(x, y);
-
-            transform.position = currentCheckpoint.position;
+            transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
         }
         else
         {
-            Debug.Log("No checkpoint found, starting from default position.");
+            transform.position = startPos;
         }
     }
 }

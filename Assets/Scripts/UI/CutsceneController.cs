@@ -4,7 +4,7 @@ using UnityEngine.Video;
 
 public class CutsceneController : MonoBehaviour
 {
-    public string nextSceneName = "GameScene";  
+    public string nextSceneName;  
     private VideoPlayer videoPlayer;
 
     private void Start()
