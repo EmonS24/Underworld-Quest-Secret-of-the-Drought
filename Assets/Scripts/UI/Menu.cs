@@ -11,7 +11,23 @@ public class Menu : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
+    private void Start()
+    {
+        if (!(PlayerPrefs.HasKey("CheckpointX") && PlayerPrefs.HasKey("CheckpointY")))
+        {
+            Debug.Log("No checkpoint found. Continue disabled.");
+        }
+    }
+
     public void PlayGame()
+    {
+        audioManager.PlaySFX(audioManager.buttonClick);
+        PlayerPrefs.DeleteKey("CheckpointX");
+        PlayerPrefs.DeleteKey("CheckpointY");
+        SceneManager.LoadSceneAsync(1);
+    }
+
+        public void ContinueGame()
     {
         audioManager.PlaySFX(audioManager.buttonClick);
         SceneManager.LoadSceneAsync(1);
