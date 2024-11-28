@@ -7,7 +7,6 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     AudioManager audioManager;
-    private PlayerVar player;
 
 
     private void Awake()
