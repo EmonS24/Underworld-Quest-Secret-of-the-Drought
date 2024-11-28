@@ -11,12 +11,19 @@ public class PlayerRespawn : MonoBehaviour
     public GameObject respawnPanel;
     public float respawnDelay;
 
+    [SerializeField] private QuestLogManager questLogManager;
+    [SerializeField] private CheckpointManager checkpointManager;
+
     private void Start()
     {
         player = GetComponent<PlayerVar>();
         health = GetComponent<PlayerHealth>();
         startPos = transform.position;
+
         respawnPanel.SetActive(false);
+        checkpointManager = FindObjectOfType<CheckpointManager>();
+        questLogManager = FindObjectOfType<QuestLogManager>(); 
+
         LoadCheckpoint();
     }
 
@@ -42,10 +49,13 @@ public class PlayerRespawn : MonoBehaviour
     private void CheckRespawn()
     {
         health.Respawn();
-        CheckpointData checkpointData = FindObjectOfType<CheckpointManager>().LoadCheckpoint();
+
+        CheckpointData checkpointData = checkpointManager.LoadCheckpoint();
         if (checkpointData != null)
         {
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
+
+            questLogManager.LoadQuestProgress(checkpointData.questProgress);
         }
         else
         {
@@ -61,22 +71,27 @@ public class PlayerRespawn : MonoBehaviour
         {
             Vector2 checkpointPosition = collision.transform.position;
             string sceneName = SceneManager.GetActiveScene().name;
-            FindObjectOfType<CheckpointManager>().SaveCheckpoint(sceneName, checkpointPosition);
+            int currentQuestProgress = questLogManager.GetQuestProgress(); 
+            checkpointManager.SaveCheckpoint(sceneName, checkpointPosition, currentQuestProgress);
+
             Debug.Log("Checkpoint saved at: " + checkpointPosition);
         }
     }
 
     private void LoadCheckpoint()
     {
-        CheckpointData checkpointData = FindObjectOfType<CheckpointManager>().LoadCheckpoint();
-
-        if (checkpointData != null)
+        CheckpointData checkpointData = checkpointManager.LoadCheckpoint();
+        
+        if (checkpointData != null && checkpointData.sceneName == SceneManager.GetActiveScene().name)
         {
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
+            questLogManager.LoadQuestProgress(checkpointData.questProgress); 
+            Debug.Log("Loaded checkpoint for scene: " + checkpointData.sceneName);
         }
         else
         {
-            transform.position = startPos;
+            transform.position = startPos; 
+            Debug.Log("No valid checkpoint found, using start position.");
         }
     }
 }

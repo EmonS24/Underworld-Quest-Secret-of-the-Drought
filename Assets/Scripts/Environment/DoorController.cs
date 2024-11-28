@@ -7,7 +7,7 @@ public class DoorController : MonoBehaviour
     public float moveDistance = 2.0f; 
     public float moveSpeed = 1.0f;     
     private Vector3 initialPosition;    
-    private bool isOpen = false;      
+    [SerializeField] private bool isOpen = false;      
 
     void Start()
     {

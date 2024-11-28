@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415ab8e45f676994ea2651692ea09a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: ParallaxTest
+  nextSceneName: Sandbox
 --- !u!114 &1174042972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e4dfd23ad21e04a98611e66044ad4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: ParallaxTest
+  nextSceneName: Sandbox
 --- !u!328 &1555454876
 VideoPlayer:
   m_ObjectHideFlags: 0

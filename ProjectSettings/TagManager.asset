@@ -10,6 +10,7 @@ TagManager:
   - Audio
   - Real
   - Checkpoint
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -95,15 +96,27 @@ TagManager:
   - name: uw1
     uniqueID: 3185007755
     locked: 0
-  - name: uw2
-    uniqueID: 1632502861
+  - name: uw5
+    uniqueID: 2296144357
+    locked: 0
+  - name: uw6
+    uniqueID: 4246312419
     locked: 0
   - name: uw3
     uniqueID: 2512755417
     locked: 0
+  - name: uw2
+    uniqueID: 1632502861
+    locked: 0
   - name: uw4
     uniqueID: 1145979819
     locked: 0
-  - name: uw5
-    uniqueID: 2296144357
+  - name: EnemyType1
+    uniqueID: 673110175
+    locked: 0
+  - name: PlayerUw
+    uniqueID: 2697041807
+    locked: 0
+  - name: uwGround
+    uniqueID: 1423531469
     locked: 0
