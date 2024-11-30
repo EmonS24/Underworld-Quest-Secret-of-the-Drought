@@ -81,7 +81,7 @@ public class PlayerMov : MonoBehaviour
         {
             return crouchSpeed;
         }
-        else if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        else if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !player.isCrouching && !player.isGrabbing)
         {
             return runSpeed;
         }

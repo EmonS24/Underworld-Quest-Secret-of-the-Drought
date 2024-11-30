@@ -1,11 +1,15 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using UnityEngine.UI;  
 
 public class Menu : MonoBehaviour
 {
     AudioManager audioManager;
     public string nextSceneName;
+
+    public GameObject loadingScreen;
+    public Slider loadingSlider;
 
     private void Awake()
     {
@@ -35,13 +39,34 @@ public class Menu : MonoBehaviour
 
         if (checkpointData != null)
         {
-            SceneManager.LoadSceneAsync(checkpointData.sceneName);
-            StartCoroutine(LoadPlayerAtCheckpoint(checkpointData));
+            // Tampilkan loading screen
+            loadingScreen.SetActive(true);
+
+            // Mulai memuat scene secara asynchronous
+            StartCoroutine(LoadSceneAsync(checkpointData.sceneName, checkpointData));
         }
         else
         {
             Debug.Log("No checkpoint found, unable to continue.");
         }
+    }
+
+    private IEnumerator LoadSceneAsync(string sceneName, CheckpointData checkpointData)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!operation.isDone)
+        {
+            if (loadingSlider != null)
+            {
+                loadingSlider.value = operation.progress;
+            }
+            yield return null;
+        }
+
+        StartCoroutine(LoadPlayerAtCheckpoint(checkpointData));
+
+        loadingScreen.SetActive(false);
     }
 
     private IEnumerator LoadPlayerAtCheckpoint(CheckpointData checkpointData)

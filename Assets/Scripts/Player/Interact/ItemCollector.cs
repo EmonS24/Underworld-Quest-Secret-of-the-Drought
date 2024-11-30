@@ -3,15 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class ItemCollector : MonoBehaviour
 {
-    private GameObject currentItem; 
+    private GameObject currentItem;
     private PlayerVar player;
 
     public int totalItems = 4;
     private int itemsCollected = 0;
     public string nextSceneName;
 
-    public QuestLogManager questLogManager; 
+    public QuestLogManager questLogManager;
     public CheckpointManager checkpointManager;
+
     void Start()
     {
         player = GetComponent<PlayerVar>();
@@ -22,32 +23,31 @@ public class ItemCollector : MonoBehaviour
         HandleCollect();
     }
 
-private void HandleCollect()
-{
-    if (Input.GetKeyDown(KeyCode.E) && player.isGrounded)
+    private void HandleCollect()
     {
-        if (currentItem != null)
+        if (Input.GetKeyDown(KeyCode.E) && player.isGrounded)
         {
-            itemsCollected++;
-
-            string itemID = currentItem.GetComponent<CollectableItem>().itemID;
-            FindObjectOfType<CheckpointManager>().AddCollectedItem(itemID);
-
-            currentItem.SetActive(false);
-
-            questLogManager.UpdateQuest($"Collect Items: {itemsCollected}/{totalItems}");
-            checkpointManager.SaveCheckpoint(SceneManager.GetActiveScene().name, transform.position, itemsCollected);
-
-            if (itemsCollected >= totalItems)
+            if (currentItem != null)
             {
-                LoadNextScene();
-            }
+                itemsCollected++;
 
-            currentItem = null;
+                string itemID = currentItem.GetComponent<CollectableItem>().itemID;
+                checkpointManager.AddCollectedItem(itemID); 
+
+                currentItem.SetActive(false);
+
+                questLogManager.SetQuestProgress(itemsCollected);  
+                checkpointManager.SaveCheckpoint(SceneManager.GetActiveScene().name, transform.position, itemsCollected);
+
+                if (itemsCollected >= totalItems)
+                {
+                    LoadNextScene();
+                }
+
+                currentItem = null;
+            }
         }
     }
-}
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
