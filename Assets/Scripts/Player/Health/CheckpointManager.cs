@@ -1,86 +1,92 @@
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
     private string checkpointFilePath;
     private List<string> collectedItemIDs = new List<string>();
 
-    private void Start()
+    private void Awake()
     {
-        checkpointFilePath = Application.persistentDataPath + "/checkpoint.json";
+        checkpointFilePath = Path.Combine(Application.persistentDataPath, "checkpoint.dat");
     }
 
-public void SaveCheckpoint(string sceneName, Vector2 position, int questProgress)
-{
-    if (SceneManager.GetActiveScene().name == sceneName)
+    public void SaveCheckpoint(string sceneName, Vector2 position, int questProgress)
     {
         CheckpointData checkpointData = new CheckpointData(
             sceneName,
             position.x,
             position.y,
             questProgress,
-            collectedItemIDs.ToArray() 
+            collectedItemIDs.ToArray()
         );
-
-        string json = JsonUtility.ToJson(checkpointData);
-        File.WriteAllText(checkpointFilePath, json);
-        Debug.Log("Checkpoint saved: " + json);
-    }
-}
-
-public void AddCollectedItem(string itemID)
-{
-    if (!collectedItemIDs.Contains(itemID))
-    {
-        collectedItemIDs.Add(itemID);
-    }
-}
-
-public CheckpointData LoadCheckpoint()
-{
-    if (File.Exists(checkpointFilePath))
-    {
-        string json = File.ReadAllText(checkpointFilePath);
-        CheckpointData checkpointData = JsonUtility.FromJson<CheckpointData>(json);
-
-        if (checkpointData.collectedItems != null)
+        using (FileStream file = File.Create(checkpointFilePath))
         {
-            foreach (string itemID in checkpointData.collectedItems)
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(file, checkpointData);
+        }
+        Debug.Log($"Checkpoint saved successfully at {checkpointFilePath}");
+    }
+
+    public void AddCollectedItem(string itemID)
+    {
+        if (!collectedItemIDs.Contains(itemID))
+        {
+            collectedItemIDs.Add(itemID);
+        }
+    }
+
+    public CheckpointData LoadCheckpoint()
+    {
+        if (File.Exists(checkpointFilePath))
+        {
+            using (FileStream file = File.Open(checkpointFilePath, FileMode.Open))
             {
-                CollectableItem[] items = FindObjectsOfType<CollectableItem>();
-                foreach (CollectableItem item in items)
+                BinaryFormatter formatter = new BinaryFormatter();
+                CheckpointData checkpointData = (CheckpointData)formatter.Deserialize(file);
+                if (checkpointData.collectedItems != null)
                 {
-                    if (item.itemID == itemID)
+                    foreach (string itemID in checkpointData.collectedItems)
                     {
-                        item.gameObject.SetActive(false);
+                        CollectableItem[] items = FindObjectsOfType<CollectableItem>();
+                        foreach (CollectableItem item in items)
+                        {
+                            if (item.itemID == itemID)
+                            {
+                                item.gameObject.SetActive(false);
+                            }
+                        }
                     }
                 }
+                Debug.Log($"Checkpoint loaded from {checkpointFilePath}");
+                return checkpointData;
             }
         }
+        else
+        {
+            Debug.Log($"No checkpoint file found at {checkpointFilePath}");
+        }
 
-        Debug.Log("Checkpoint loaded: " + json);
-        return checkpointData;
-    }
-    else
-    {
-        Debug.Log("No checkpoint found.");
         return null;
     }
-}
 
-
+    public void LoadCollectedItems(string[] collectedItems)
+    {
+        collectedItemIDs = new List<string>(collectedItems);
+    }
 
     public void ClearCheckpoint()
     {
         if (File.Exists(checkpointFilePath))
         {
             File.Delete(checkpointFilePath);
-            Debug.Log("Checkpoint cleared.");
+            Debug.Log("Checkpoint file deleted.");
+        }
+        else
+        {
+            Debug.Log("No checkpoint file to clear.");
         }
     }
 }
-
-

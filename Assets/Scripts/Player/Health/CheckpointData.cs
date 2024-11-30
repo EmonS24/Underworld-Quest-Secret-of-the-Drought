@@ -5,7 +5,7 @@ public class CheckpointData
     public float posX;
     public float posY;
     public int questProgress;
-    public string[] collectedItems; 
+    public string[] collectedItems;
 
     public CheckpointData(string sceneName, float posX, float posY, int questProgress, string[] collectedItems)
     {

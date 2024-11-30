@@ -55,7 +55,9 @@ public class PlayerRespawn : MonoBehaviour
         {
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
 
+            // Update quest progress and item collection
             questLogManager.LoadQuestProgress(checkpointData.questProgress);
+            checkpointManager.LoadCollectedItems(checkpointData.collectedItems);
         }
         else
         {
@@ -86,6 +88,7 @@ public class PlayerRespawn : MonoBehaviour
         {
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
             questLogManager.LoadQuestProgress(checkpointData.questProgress); 
+            checkpointManager.LoadCollectedItems(checkpointData.collectedItems);
             Debug.Log("Loaded checkpoint for scene: " + checkpointData.sceneName);
         }
         else

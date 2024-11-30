@@ -3,10 +3,11 @@ using TMPro;
 
 public class QuestLogManager : MonoBehaviour
 {
-    public GameObject questMenu; 
+    public GameObject questMenu;
     public TextMeshProUGUI questText;
 
-    private int questProgress = 0; 
+    private int questProgress = 0;
+
     void Start()
     {
         UpdateQuest("No active quests.");
@@ -25,7 +26,7 @@ public class QuestLogManager : MonoBehaviour
     public void SetQuestProgress(int progress)
     {
         questProgress = progress;
-        UpdateQuest($"Collect Items: {questProgress}/4");
+        UpdateQuest($"Collect Items: {questProgress}/4"); 
     }
 
     public void LoadQuestProgress(int progress)
