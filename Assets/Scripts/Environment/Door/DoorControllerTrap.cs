@@ -18,16 +18,16 @@ public class DoorControllerTrap : MonoBehaviour
     {
         if (isOpen)
         {
-            if (transform.position.y < initialPosition.y + moveDistance)
+            if (transform.position.x > initialPosition.x - moveDistance)
             {
                 transform.position += Vector3.left * moveSpeed * Time.deltaTime;
             }
         }
         else
         {
-            if (transform.position.y > initialPosition.y)
+            if (transform.position.x < initialPosition.x)
             {
-                transform.position -= Vector3.left * moveSpeed * Time.deltaTime;
+                transform.position += Vector3.left * moveSpeed * Time.deltaTime;
             }
         }
     }

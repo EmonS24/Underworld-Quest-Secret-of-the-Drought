@@ -9,26 +9,17 @@ public class Lever : MonoBehaviour
     public Sprite leverInactiveSprite;
     private SpriteRenderer spriteRenderer;
     private bool isActive = false;
-    private bool isPlayerInTrigger = false;
+    public GameObject interactPanel;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = leverInactiveSprite;
+        interactPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.E))
-        {
-            ToggleLever();
-        }
-    }
-
-    private void ToggleLever()
-    {
-        isActive = !isActive;
-
         if (isActive)
         {
             spriteRenderer.sprite = leverActiveSprite;
@@ -45,7 +36,11 @@ public class Lever : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerInTrigger = true;
+            interactPanel.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                isActive = !isActive;
+            }
         }
     }
 
@@ -53,7 +48,7 @@ public class Lever : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerInTrigger = false;
+            interactPanel.SetActive(false);
         }
     }
 }

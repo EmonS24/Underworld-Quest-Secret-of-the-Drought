@@ -1,30 +1,40 @@
 using System.Collections;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using UnityEngine;
 
-public class LedgeDetection: MonoBehaviour
-    {
+public class LedgeDetection : MonoBehaviour
+{
     [SerializeField] private float radius;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private PlayerClimb climb;
+    [SerializeField] private PlayerVar player;
     public bool canDetected;
+
     private void Update()
     {
+        if (player.isCrouching)
+        {
+            canDetected = false;
+        }
+        else
+        {
+            canDetected = true;
+        }
         if (canDetected)
-        climb.ledgeDetected = Physics2D.OverlapCircle(transform.position, radius, groundLayer);
+            climb.ledgeDetected = Physics2D.OverlapCircle(transform.position, radius, groundLayer);
     }
 
-    private void OnTriggerEnter2D (Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
-        canDetected = false;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            canDetected = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
-        canDetected = true;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            canDetected = true;
     }
 
     private void OnDrawGizmos()
