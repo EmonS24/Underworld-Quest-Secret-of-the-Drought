@@ -13,9 +13,11 @@ public class ItemCollector : MonoBehaviour
     public QuestLogManager questLogManager;
     public CheckpointManager checkpointManager;
 
+    [SerializeField] private GameObject interactPanel; 
     void Start()
     {
         player = GetComponent<PlayerVar>();
+        interactPanel.SetActive(false); 
     }
 
     void Update()
@@ -45,6 +47,7 @@ public class ItemCollector : MonoBehaviour
                 }
 
                 currentItem = null;
+                interactPanel.SetActive(false); 
             }
         }
     }
@@ -54,6 +57,7 @@ public class ItemCollector : MonoBehaviour
         if (collision.CompareTag("Collectable"))
         {
             currentItem = collision.gameObject;
+            interactPanel.SetActive(true); 
         }
     }
 
@@ -62,6 +66,7 @@ public class ItemCollector : MonoBehaviour
         if (collision.CompareTag("Collectable"))
         {
             currentItem = null;
+            interactPanel.SetActive(false); 
         }
     }
 

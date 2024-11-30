@@ -25,7 +25,7 @@ public class PlayerVar : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isDeath)
         {
             if (!isPaused)
             {
@@ -40,7 +40,7 @@ public class PlayerVar : MonoBehaviour
                 Time.timeScale = 1;
             }
         } 
-        else if (Input.GetKeyDown(KeyCode.Tab))
+        else if (Input.GetKeyDown(KeyCode.Tab) && !isDeath)
         {
             if (!isPaused)
             {

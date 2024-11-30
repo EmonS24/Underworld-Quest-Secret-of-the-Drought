@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerRespawn : MonoBehaviour
 
     public GameObject respawnPanel;
     public float respawnDelay;
+    private CanvasGroup respawnCanvasGroup;
 
     [SerializeField] private QuestLogManager questLogManager;
     [SerializeField] private CheckpointManager checkpointManager;
@@ -21,6 +23,9 @@ public class PlayerRespawn : MonoBehaviour
         startPos = transform.position;
 
         respawnPanel.SetActive(false);
+        respawnCanvasGroup = respawnPanel.GetComponent<CanvasGroup>(); 
+        respawnCanvasGroup.alpha = 0f;  
+
         checkpointManager = FindObjectOfType<CheckpointManager>();
         questLogManager = FindObjectOfType<QuestLogManager>(); 
 
@@ -44,6 +49,22 @@ public class PlayerRespawn : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
         respawnPanel.SetActive(true);
+        StartCoroutine(FadeInRespawnPanel());  
+    }
+
+    private IEnumerator FadeInRespawnPanel()
+    {
+        float timeElapsed = 0f;
+        float fadeDuration = 1f;  
+
+        while (timeElapsed < fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            respawnCanvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);  
+            yield return null;
+        }
+
+        respawnCanvasGroup.alpha = 1f;  
     }
 
     private void CheckRespawn()
@@ -54,8 +75,6 @@ public class PlayerRespawn : MonoBehaviour
         if (checkpointData != null)
         {
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
-
-            // Update quest progress and item collection
             questLogManager.LoadQuestProgress(checkpointData.questProgress);
             checkpointManager.LoadCollectedItems(checkpointData.collectedItems);
         }
@@ -64,7 +83,23 @@ public class PlayerRespawn : MonoBehaviour
             transform.position = startPos;
         }
 
-        respawnPanel.SetActive(false);
+        StartCoroutine(FadeOutRespawnPanel());  
+    }
+
+    private IEnumerator FadeOutRespawnPanel()
+    {
+        float timeElapsed = 0f;
+        float fadeDuration = 1f;  
+
+        while (timeElapsed < fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            respawnCanvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / fadeDuration);
+            yield return null;
+        }
+
+        respawnCanvasGroup.alpha = 0f;  
+        respawnPanel.SetActive(false);  
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
