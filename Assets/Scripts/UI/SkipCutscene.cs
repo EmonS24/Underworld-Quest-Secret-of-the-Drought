@@ -33,14 +33,14 @@ public class SkipCutscene : MonoBehaviour
 
     private IEnumerator ShowSkipButton()
     {
-        yield return new WaitForSeconds(delayBeforeShow);
+        yield return new WaitForSecondsRealtime(delayBeforeShow);
 
         float timeElapsed = 0f;
         float fadeDuration = 1f;
 
         while (timeElapsed < fadeDuration)
         {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             canvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);
             yield return null;
         }
