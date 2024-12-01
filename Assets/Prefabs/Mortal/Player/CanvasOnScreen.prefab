@@ -417,7 +417,7 @@ Canvas:
   m_GameObject: {fileID: 1385960295358270754}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1693,7 +1693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5017710203426797099, guid: 53f5d86cbc52dd74ebf2143b49a5e40a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -64.68655
+      value: -64.686554
       objectReference: {fileID: 0}
     - target: {fileID: 7345328435493896084, guid: 53f5d86cbc52dd74ebf2143b49a5e40a, type: 3}
       propertyPath: m_Name
@@ -1742,6 +1742,10 @@ PrefabInstance:
     - target: {fileID: 8808102296733288405, guid: 53f5d86cbc52dd74ebf2143b49a5e40a, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1016
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005797258589605570, guid: 53f5d86cbc52dd74ebf2143b49a5e40a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.6098022
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7739352923520337306, guid: 53f5d86cbc52dd74ebf2143b49a5e40a, type: 3}
