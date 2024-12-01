@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3631926284359986724}
   - component: {fileID: 4031031051755910713}
   - component: {fileID: 6132661076955372808}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 4
   moveSpeed: 20
+  isOpen: 0

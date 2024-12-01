@@ -10,7 +10,6 @@ public class PlayerClimb : MonoBehaviour
     [SerializeField] private float climbDuration;
     private Vector2 climbBegunPosition; 
     private Vector2 climbOverPosition; 
-    public LayerMask groundLayer;
     public bool ledgeDetected;
     private bool canGrabLedge = true;
     private PlayerVar player;
