@@ -71,6 +71,9 @@ public class PlayerRespawn : MonoBehaviour
     {
         health.Respawn();
 
+        string sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
+
         CheckpointData checkpointData = checkpointManager.LoadCheckpoint();
         if (checkpointData != null)
         {
@@ -85,6 +88,7 @@ public class PlayerRespawn : MonoBehaviour
 
         StartCoroutine(FadeOutRespawnPanel());  
     }
+
 
     private IEnumerator FadeOutRespawnPanel()
     {

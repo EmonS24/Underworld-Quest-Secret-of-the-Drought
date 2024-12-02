@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -10,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public Image healthBar;
 
+    // Indikator untuk memeriksa apakah pemain baru saja menerima damage
+    public bool isDamaged { get; private set; }
+
     void Start()
     {
         player = GetComponent<PlayerVar>();
@@ -19,15 +21,24 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        // Memperbarui health bar
         if (healthBar != null)
         {
-            healthBar.fillAmount = health / maxHealth; 
+            healthBar.fillAmount = health / maxHealth;
+        }
+
+        // Reset indikator isDamaged setelah setiap frame
+        if (isDamaged)
+        {
+            isDamaged = false;
         }
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        isDamaged = true;  // Menandakan bahwa pemain baru saja menerima damage
+        
         if (health <= 0)
         {
             health = 0;

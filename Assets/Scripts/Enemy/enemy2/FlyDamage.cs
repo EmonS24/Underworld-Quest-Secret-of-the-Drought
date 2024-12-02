@@ -9,6 +9,9 @@ public class FlyingEnemyDamage : MonoBehaviour
     public PlayerMov playerMov;
     private FlyFollow enemy;
 
+    private bool canDamage = true;
+    public float damageCooldown;  
+
     void Start()
     {
         enemy = GetComponent<FlyFollow>();
@@ -16,7 +19,7 @@ public class FlyingEnemyDamage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && canDamage)
         {
             enemy.isChasing = false;
             playerHp.TakeDamage(damage);
@@ -30,6 +33,9 @@ public class FlyingEnemyDamage : MonoBehaviour
             {
                 playerMov.KnockFromRight = false;
             }
+
+            enemy.StartChaseCooldown();
+            StartCoroutine(DamageCooldown());
         }
     }
 
@@ -39,5 +45,12 @@ public class FlyingEnemyDamage : MonoBehaviour
         {
             enemy.isChasing = true;
         }
+    }
+
+    private IEnumerator DamageCooldown()
+    {
+        canDamage = false;  
+        yield return new WaitForSeconds(damageCooldown);  
+        canDamage = true; 
     }
 }

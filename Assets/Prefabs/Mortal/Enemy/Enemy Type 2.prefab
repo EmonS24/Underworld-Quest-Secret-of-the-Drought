@@ -268,7 +268,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1025932771
-  m_SortingLayer: 7
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: -1487210175, guid: d86f8547b81ff8746ac581984866df11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -368,6 +368,7 @@ MonoBehaviour:
   - {fileID: 2923689665282556294}
   - {fileID: 3152145937848463623}
   isChasing: 0
+  chaseCooldownTime: 0.3
 --- !u!114 &4719573924853460185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +384,7 @@ MonoBehaviour:
   damage: 2
   playerHp: {fileID: 0}
   playerMov: {fileID: 0}
+  damageCooldown: 0.3
 --- !u!1 &8140409749614065190
 GameObject:
   m_ObjectHideFlags: 0
