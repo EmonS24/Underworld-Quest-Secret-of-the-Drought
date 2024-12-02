@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -9,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     public float health;
     public Image healthBar;
+
+    public bool isDamaged { get; private set; }
 
     void Start()
     {
@@ -21,32 +22,39 @@ public class PlayerHealth : MonoBehaviour
     {
         if (healthBar != null)
         {
-            healthBar.fillAmount = health / maxHealth; 
+            healthBar.fillAmount = health / maxHealth;
+        }
+
+        if (isDamaged)
+        {
+            isDamaged = false;
         }
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        isDamaged = true;  
+        
         if (health <= 0)
         {
             health = 0;
             player.isDeath = true;
             move.allowMove = false;
-            move.stamina = 0;
         }
     }
 
-    public void AddHealth(float _value)
+    public void AddHealth(float amount)
     {
-        health = Mathf.Clamp(health + _value, 0, maxHealth);
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
     public void Respawn()
     {
-        AddHealth(maxHealth);
-        player.isDeath = false;
-        move.allowMove = true;
-        move.stamina = move.maxStamina;
+        health = maxHealth;
     }
 }

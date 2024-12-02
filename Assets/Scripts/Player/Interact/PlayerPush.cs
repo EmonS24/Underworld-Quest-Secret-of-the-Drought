@@ -9,15 +9,23 @@ public class PlayerPushPull : MonoBehaviour
     private PlayerVar player;
     [SerializeField] private GameObject interactPanel; 
 
+    private PlayerHealth playerHealth;
+
     void Start()
     {
         player = GetComponent<PlayerVar>();
+        playerHealth = GetComponent<PlayerHealth>();
         interactPanel.SetActive(false); 
     }
 
     void Update()
     {
         HandleGrab();
+
+        if (playerHealth != null && playerHealth.isDamaged)
+        {
+            ReleaseGrab();
+        }
     }
 
     private void HandleGrab()
@@ -26,27 +34,27 @@ public class PlayerPushPull : MonoBehaviour
         {
             if (currentObject != null)
             {
-                player.isGrabbing = !player.isGrabbing;
-
-                Rigidbody2D rb = currentObject.GetComponent<Rigidbody2D>();
-                if (rb != null)
+                if (player.isGrabbing)
                 {
-                    if (player.isGrabbing)
+                    ReleaseGrab();
+                }
+                else
+                {
+                    player.isGrabbing = true;
+                    Rigidbody2D rb = currentObject.GetComponent<Rigidbody2D>();
+                    if (rb != null)
                     {
-                        rb.constraints = RigidbodyConstraints2D.FreezeRotation; 
-                    }
-                    else
-                    {
-                        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; 
-                        currentObject.transform.position = (Vector2)transform.position + offset; 
+                        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                     }
                 }
             }
         }
+
         if (player.isGrabbing && currentObject != null)
         {
             MoveObject();
         }
+
         if (!player.isGrounded)
         {
             ReleaseGrab();
@@ -69,7 +77,6 @@ public class PlayerPushPull : MonoBehaviour
         {
             currentObject = collision.gameObject;
             offset = (Vector2)(currentObject.transform.position - transform.position);
-
             interactPanel.SetActive(true);
         }
     }
@@ -93,7 +100,6 @@ public class PlayerPushPull : MonoBehaviour
         if (collision.CompareTag("Pushable"))
         {
             currentObject = null;
-
             interactPanel.SetActive(false);
 
             if (player.isGrabbing)

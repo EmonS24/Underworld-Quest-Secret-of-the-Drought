@@ -14,6 +14,9 @@ public class FlyFollow : MonoBehaviour
     private PlayerVar player; 
     public bool isChasing = false;
 
+    private bool isOnCooldown = false;  
+    public float chaseCooldownTime;  
+
     void Start()
     {
         player = FindObjectOfType<PlayerVar>(); 
@@ -21,11 +24,11 @@ public class FlyFollow : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return; 
+        if (player == null) return;
 
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
-        if (distanceFromPlayer < lineOfSite && !player.isDeath)
+        if (distanceFromPlayer < lineOfSite && !player.isDeath && !isOnCooldown)
         {
             isChasing = true;
         }
@@ -52,7 +55,7 @@ public class FlyFollow : MonoBehaviour
 
     private void Patrol()
     {
-        if (patrolPoints.Length == 0) return; 
+        if (patrolPoints.Length == 0) return;
 
         Transform targetPoint = patrolPoints[patrolIndex];
         FlipSprite(targetPoint.position.x);
@@ -91,5 +94,20 @@ public class FlyFollow : MonoBehaviour
         {
             Gizmos.DrawWireSphere(point.position, 0.2f);
         }
+    }
+
+    public void StartChaseCooldown()
+    {
+        if (!isOnCooldown)
+        {
+            isOnCooldown = true;
+            StartCoroutine(ChaseCooldown());
+        }
+    }
+
+    private IEnumerator ChaseCooldown()
+    {
+        yield return new WaitForSeconds(chaseCooldownTime);
+        isOnCooldown = false;
     }
 }

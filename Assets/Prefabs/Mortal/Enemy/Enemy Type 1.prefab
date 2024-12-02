@@ -280,6 +280,7 @@ MonoBehaviour:
   playerMov: {fileID: 0}
   attackTrigger: {fileID: 7279417978236319939}
   damageTrigger: {fileID: 4134125491113737497}
+  damageCooldown: 0.3
 --- !u!114 &5236941000195572979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +304,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  chaseCooldownTime: 0.3
 --- !u!114 &7749965624181865238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +415,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029018402, y: -0.067111254}
+  m_Offset: {x: 0.029018402, y: -0.21586823}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -424,7 +426,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.734764, y: 1.61269}
+  m_Size: {x: 2.734764, y: 0.15487051}
   m_EdgeRadius: 0
 --- !u!61 &7279417978236319939
 BoxCollider2D:
@@ -458,7 +460,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0068588257, y: -0.04115951}
+  m_Offset: {x: 0.0068588257, y: -0.07834911}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -469,7 +471,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.443726, y: 1.6539333}
+  m_Size: {x: 8.443726, y: 1.7283125}
   m_EdgeRadius: 0
 --- !u!1 &4785109877500487553
 GameObject:

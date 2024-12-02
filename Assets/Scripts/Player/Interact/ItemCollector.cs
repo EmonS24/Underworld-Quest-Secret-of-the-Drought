@@ -34,12 +34,16 @@ public class ItemCollector : MonoBehaviour
                 itemsCollected++;
 
                 string itemID = currentItem.GetComponent<CollectableItem>().itemID;
-                checkpointManager.AddCollectedItem(itemID); 
+                checkpointManager.AddCollectedItem(itemID);
 
                 currentItem.SetActive(false);
 
-                questLogManager.SetQuestProgress(itemsCollected);  
-                checkpointManager.SaveCheckpoint(SceneManager.GetActiveScene().name, transform.position, itemsCollected);
+                questLogManager.SetQuestProgress(itemsCollected);
+
+                PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+                float health = playerHealth != null ? playerHealth.health : 0f;
+
+                checkpointManager.SaveCheckpoint(SceneManager.GetActiveScene().name, transform.position, itemsCollected, health);
 
                 if (itemsCollected >= totalItems)
                 {
@@ -47,7 +51,7 @@ public class ItemCollector : MonoBehaviour
                 }
 
                 currentItem = null;
-                interactPanel.SetActive(false); 
+                interactPanel.SetActive(false);
             }
         }
     }

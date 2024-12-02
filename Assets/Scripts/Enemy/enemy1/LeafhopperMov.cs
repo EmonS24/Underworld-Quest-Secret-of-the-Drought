@@ -15,6 +15,9 @@ public class LeafhopperMov : MonoBehaviour
     public Vector2 detectionSize;
     public LayerMask playerLayer;
 
+    private bool isOnCooldown = false;  
+    public float chaseCooldownTime;  
+
     void Start()
     {
         Leafhopper = GetComponent<LeafhopperVar>();
@@ -25,7 +28,7 @@ public class LeafhopperMov : MonoBehaviour
     {
         bool playerInDetection = Physics2D.OverlapBox(detectionArea.position, detectionSize, 0, playerLayer);
 
-        if (Leafhopper.isChasing)
+        if (Leafhopper.isChasing && !isOnCooldown)
         {
             if (!playerInDetection || player.isDeath)
             {
@@ -88,6 +91,21 @@ public class LeafhopperMov : MonoBehaviour
         {
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
+    }
+
+    public void StartChaseCooldown()
+    {
+        if (!isOnCooldown)
+        {
+            isOnCooldown = true;
+            StartCoroutine(ChaseCooldown());
+        }
+    }
+
+    private IEnumerator ChaseCooldown()
+    {
+        yield return new WaitForSeconds(chaseCooldownTime);
+        isOnCooldown = false;
     }
 
     void OnDrawGizmosSelected()
