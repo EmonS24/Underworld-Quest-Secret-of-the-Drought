@@ -7,15 +7,16 @@ public class CheckpointManager : MonoBehaviour
 {
     private string checkpointFilePath;
     private List<string> collectedItemIDs = new List<string>();
-    private List<PushableObjectData> pushableObjectPositions = new List<PushableObjectData>(); 
+    private List<PushableObjectData> pushableObjectPositions = new List<PushableObjectData>();
 
     private void Awake()
     {
         checkpointFilePath = Path.Combine(Application.persistentDataPath, "checkpoint.dat");
     }
 
-    public void SaveCheckpoint(string sceneName, Vector2 position, int questProgress)
+    public void SaveCheckpoint(string sceneName, Vector2 position, int questProgress, float playerHealth)
     {
+        // Save pushable objects' positions
         foreach (var pushableObject in FindObjectsOfType<PushableObject>())
         {
             pushableObjectPositions.Add(new PushableObjectData(pushableObject.objectID, pushableObject.transform.position.x, pushableObject.transform.position.y));
@@ -27,7 +28,8 @@ public class CheckpointManager : MonoBehaviour
             position.y,
             questProgress,
             collectedItemIDs.ToArray(),
-            pushableObjectPositions.ToArray() 
+            pushableObjectPositions.ToArray(),
+            playerHealth
         );
 
         using (FileStream file = File.Create(checkpointFilePath))
@@ -64,7 +66,7 @@ public class CheckpointManager : MonoBehaviour
                         {
                             if (item.itemID == itemID)
                             {
-                                item.gameObject.SetActive(false);
+                                item.gameObject.SetActive(false); 
                             }
                         }
                     }
@@ -80,6 +82,13 @@ public class CheckpointManager : MonoBehaviour
                             obj.transform.position = new Vector3(objData.posX, objData.posY, obj.transform.position.z);
                         }
                     }
+                }
+
+                PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.health = checkpointData.playerHealth; 
+                    playerHealth.AddHealth(0); 
                 }
 
                 Debug.Log($"Checkpoint loaded from {checkpointFilePath}");

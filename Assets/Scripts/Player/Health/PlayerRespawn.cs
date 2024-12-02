@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -89,7 +88,6 @@ public class PlayerRespawn : MonoBehaviour
         StartCoroutine(FadeOutRespawnPanel());  
     }
 
-
     private IEnumerator FadeOutRespawnPanel()
     {
         float timeElapsed = 0f;
@@ -113,9 +111,8 @@ public class PlayerRespawn : MonoBehaviour
             Vector2 checkpointPosition = collision.transform.position;
             string sceneName = SceneManager.GetActiveScene().name;
             int currentQuestProgress = questLogManager.GetQuestProgress(); 
-            checkpointManager.SaveCheckpoint(sceneName, checkpointPosition, currentQuestProgress);
-
-            Debug.Log("Checkpoint saved at: " + checkpointPosition);
+            checkpointManager.SaveCheckpoint(sceneName, checkpointPosition, currentQuestProgress, health.health); 
+            health.AddHealth(health.maxHealth); 
         }
     }
 
@@ -128,12 +125,10 @@ public class PlayerRespawn : MonoBehaviour
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
             questLogManager.LoadQuestProgress(checkpointData.questProgress); 
             checkpointManager.LoadCollectedItems(checkpointData.collectedItems);
-            Debug.Log("Loaded checkpoint for scene: " + checkpointData.sceneName);
         }
         else
         {
             transform.position = startPos; 
-            Debug.Log("No valid checkpoint found, using start position.");
         }
     }
 }

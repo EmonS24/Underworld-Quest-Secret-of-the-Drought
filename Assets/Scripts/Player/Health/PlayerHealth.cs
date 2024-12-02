@@ -9,7 +9,6 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public Image healthBar;
 
-    // Indikator untuk memeriksa apakah pemain baru saja menerima damage
     public bool isDamaged { get; private set; }
 
     void Start()
@@ -21,13 +20,11 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        // Memperbarui health bar
         if (healthBar != null)
         {
             healthBar.fillAmount = health / maxHealth;
         }
 
-        // Reset indikator isDamaged setelah setiap frame
         if (isDamaged)
         {
             isDamaged = false;
@@ -37,27 +34,27 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        isDamaged = true;  // Menandakan bahwa pemain baru saja menerima damage
+        isDamaged = true;  
         
         if (health <= 0)
         {
             health = 0;
             player.isDeath = true;
             move.allowMove = false;
-            move.stamina = 0;
         }
     }
 
-    public void AddHealth(float _value)
+    public void AddHealth(float amount)
     {
-        health = Mathf.Clamp(health + _value, 0, maxHealth);
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
     public void Respawn()
     {
-        AddHealth(maxHealth);
-        player.isDeath = false;
-        move.allowMove = true;
-        move.stamina = move.maxStamina;
+        health = maxHealth;
     }
 }
