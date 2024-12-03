@@ -10,18 +10,16 @@ public class PlayerJump : MonoBehaviour
     public float lowJumpMultiplier;
     public Transform groundCheck;
     public LayerMask groundLayer;
-    public float groundCheckRadius = 0.1f;
+    public Vector2 boxSize = new Vector2(0.5f, 0.1f);
     private PlayerVar player;
 
     private AudioManager audioManager;
-
-    private bool wasGrounded = true; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<PlayerVar>();
-        audioManager = FindObjectOfType<AudioManager>(); 
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -41,7 +39,7 @@ public class PlayerJump : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        if (player.isGrounded && Input.GetKeyDown(KeyCode.Space) && !player.isCrouching && !player.isGrabbing)
+        if (player.isGrounded && Input.GetKeyDown(KeyCode.Space) && !player.isCrouching && !player.isGrabbing && !player.isClimbing)
         {
             player.isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -55,25 +53,24 @@ public class PlayerJump : MonoBehaviour
 
     public void CheckGrounded()
     {
-        bool currentlyGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
-        player.isGrounded = currentlyGrounded;
+        bool isGroundedNow = Physics2D.OverlapBox(groundCheck.position, boxSize, 0f, groundLayer);
 
-        if (currentlyGrounded && !wasGrounded)
+        if (isGroundedNow && !player.isGrounded && audioManager != null)
         {
-            if (audioManager != null)
-            {
-                audioManager.PlaySFX(audioManager.jumpGround);
-            }
-
-            player.isJumping = false;
+            audioManager.PlaySFX(audioManager.jumpGround);
         }
 
-        wasGrounded = currentlyGrounded;
+        player.isGrounded = isGroundedNow;
+
+        if (player.isGrounded)
+        {
+            player.isJumping = false;
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckRadius);
+        Gizmos.DrawWireCube(groundCheck.position, boxSize);
     }
 }

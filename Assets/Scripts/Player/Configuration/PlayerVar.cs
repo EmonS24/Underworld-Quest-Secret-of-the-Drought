@@ -8,7 +8,6 @@ public class PlayerVar : MonoBehaviour
     public bool isJumping; 
     public bool isGrounded;   
     public bool isClimbing;  
-    public bool canClimb;  
     public bool isCrouching; 
     public bool isGrabbing = false; 
     public bool isPushing; 

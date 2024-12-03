@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DoorControllerTrap : MonoBehaviour
 {
-    public float moveDistance = 2.0f; 
-    public float moveSpeed = 1.0f;     
+    public float moveDistance; 
+    public float moveSpeed;     
     private Vector3 initialPosition;    
     [SerializeField] private bool isOpen = false;      
 

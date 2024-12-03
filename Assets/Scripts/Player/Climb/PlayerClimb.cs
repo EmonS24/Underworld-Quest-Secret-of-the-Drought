@@ -49,7 +49,7 @@ public class PlayerClimb : MonoBehaviour
                 climbOverPosition = ledgePosition + new Vector2(-offset2.x, offset2.y);
             }
 
-            player.canClimb = true; 
+            player.isClimbing = true; 
 
             rb.velocity = Vector2.zero;
             rb.isKinematic = true;
@@ -70,7 +70,7 @@ public class PlayerClimb : MonoBehaviour
         transform.position = climbOverPosition;
 
         canGrabLedge = true;
-        player.canClimb = false;
+        player.isClimbing = false;
         rb.isKinematic = false; 
     }
 }
