@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 995713433710512570}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -1.1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 3081074987785096950}
   - component: {fileID: 744378926002980913}
   - component: {fileID: 9104894645877873687}
+  - component: {fileID: 2945399081407769938}
   m_Layer: 7
   m_Name: PlayerObject
   m_TagString: Player
@@ -157,7 +158,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &6650992630020913207
 BoxCollider2D:
@@ -220,7 +221,6 @@ MonoBehaviour:
   isJumping: 0
   isGrounded: 0
   isClimbing: 0
-  canClimb: 0
   isCrouching: 0
   isGrabbing: 0
   isPushing: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 6
   crouchSpeed: 2
-  grabSpeed: 2
+  grabSpeed: 1
   allowMove: 1
   KBForce: 10
   KBCounter: 0
@@ -297,8 +297,8 @@ MonoBehaviour:
   groundCheck: {fileID: 1293897291444766285}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 320
-  groundCheckRadius: 0.3
+    m_Bits: 24896
+  boxSize: {x: 0.61, y: 0.06}
 --- !u!114 &8615095447546152520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,9 +331,6 @@ MonoBehaviour:
   offset1: {x: -0.34, y: -0.45}
   offset2: {x: 0.1, y: 1.2}
   climbDuration: 0.6
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 320
   ledgeDetected: 0
 --- !u!114 &368010246009034627
 MonoBehaviour:
@@ -347,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a6ab0030fd53641aad2c76d838545a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactPanel: {fileID: 0}
 --- !u!114 &627921922633382535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e796d31c195a44aab54470fedd30f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 20
   health: 0
   healthBar: {fileID: 0}
 --- !u!95 &3081074987785096950
@@ -404,9 +402,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPanel: {fileID: 0}
-  respawnDelay: 1
+  respawnDelay: 0.1
   questLogManager: {fileID: 0}
   checkpointManager: {fileID: 0}
+--- !u!114 &2945399081407769938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081545963284029668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81afc96d535d6d441a9fec6a5afcee5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalItems: 4
+  nextSceneName: Cutscene1
+  questLogManager: {fileID: 0}
+  checkpointManager: {fileID: 0}
+  interactPanel: {fileID: 0}
 --- !u!1 &3949715775163699563
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +504,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 320
   climb: {fileID: 5199695758121614387}
+  player: {fileID: 4977850871676926157}
   canDetected: 0
 --- !u!61 &2540336621798934210
 BoxCollider2D:
