@@ -826,11 +826,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7271508999901496163, guid: 7fe3b9ca6a887cc459f79e3823a3ea37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 184.35349
+      value: 199.97949
       objectReference: {fileID: 0}
     - target: {fileID: 7271508999901496163, guid: 7fe3b9ca6a887cc459f79e3823a3ea37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5633903
+      value: 0.6506095
       objectReference: {fileID: 0}
     - target: {fileID: 7271508999901496163, guid: 7fe3b9ca6a887cc459f79e3823a3ea37, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3083,11 +3083,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0387d63bf9ba5fd48bca9698c7974830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverID: lever_1
   door: {fileID: 943271281}
   leverActiveSprite: {fileID: 21300000, guid: 9d3880111e169284eaee339c898965cd, type: 3}
   leverInactiveSprite: {fileID: 21300000, guid: d09abc3121bf3914690b7b4cdfa36619, type: 3}
-  isActive: 0
   interactPanel: {fileID: 1659575432}
 --- !u!1 &765060819
 GameObject:
@@ -4243,7 +4241,6 @@ MonoBehaviour:
   moveDistance: 8
   moveSpeed: 20
   isOpen: 0
-  doorID: door_2
 --- !u!4 &964498855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6356736983572615398, guid: e674a7826387ab24882ed9865ff09a1e, type: 3}
@@ -5640,13 +5637,33 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1293897291444766285, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293897291444766285, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.21
+      objectReference: {fileID: 0}
     - target: {fileID: 2081545963284029668, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
     - target: {fileID: 2138239852737075216, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: boxSize.x
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138239852737075216, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: boxSize.y
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138239852737075216, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: fallMultiplier
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138239852737075216, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2138239852737075216, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -5682,11 +5699,11 @@ PrefabInstance:
       objectReference: {fileID: 397719100}
     - target: {fileID: 5532776128816519617, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.1
+      value: 5.526
       objectReference: {fileID: 0}
     - target: {fileID: 5532776128816519617, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.24
+      value: -2.026
       objectReference: {fileID: 0}
     - target: {fileID: 5532776128816519617, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6750,11 +6767,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 212675426604178854, guid: 4ad446ef38ed0a843b8cab37b50045db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 184.35349
+      value: 199.97949
       objectReference: {fileID: 0}
     - target: {fileID: 212675426604178854, guid: 4ad446ef38ed0a843b8cab37b50045db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5633903
+      value: 0.6506095
       objectReference: {fileID: 0}
     - target: {fileID: 212675426604178854, guid: 4ad446ef38ed0a843b8cab37b50045db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7326,7 +7343,6 @@ MonoBehaviour:
   moveDistance: 4
   moveSpeed: 50
   isOpen: 0
-  doorID: door_5
 --- !u!1001 &1652331297
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkipCutscene : MonoBehaviour
 {
     AudioManager audioManager;
-    public string nextSceneName = "GameScene";
+    public string nextSceneName;
 
     public GameObject loadingScreen;
     public Slider loadingSlider;

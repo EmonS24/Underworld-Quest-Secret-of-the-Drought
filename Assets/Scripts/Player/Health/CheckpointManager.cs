@@ -16,7 +16,6 @@ public class CheckpointManager : MonoBehaviour
 
     public void SaveCheckpoint(string sceneName, Vector2 position, int questProgress, float playerHealth)
     {
-        // Save pushable objects' positions
         foreach (var pushableObject in FindObjectsOfType<PushableObject>())
         {
             pushableObjectPositions.Add(new PushableObjectData(pushableObject.objectID, pushableObject.transform.position.x, pushableObject.transform.position.y));

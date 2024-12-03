@@ -39,10 +39,7 @@ public class Menu : MonoBehaviour
 
         if (checkpointData != null)
         {
-            // Tampilkan loading screen
             loadingScreen.SetActive(true);
-
-            // Mulai memuat scene secara asynchronous
             StartCoroutine(LoadSceneAsync(checkpointData.sceneName, checkpointData));
         }
         else

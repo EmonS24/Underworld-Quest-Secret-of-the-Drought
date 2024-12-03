@@ -30,7 +30,6 @@ public class CutsceneController : MonoBehaviour
     private void OnVideoEnd(VideoPlayer vp)
     {
         loadingScreen.SetActive(true);
-
         StartCoroutine(LoadSceneAsync(nextSceneName));
     }
 
