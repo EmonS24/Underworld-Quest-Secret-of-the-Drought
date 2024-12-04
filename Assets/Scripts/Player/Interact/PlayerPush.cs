@@ -7,7 +7,7 @@ public class PlayerPushPull : MonoBehaviour
     private GameObject currentObject;
     private Vector2 offset;
     private PlayerVar player;
-    [SerializeField] private GameObject interactPanel; 
+    [SerializeField] private GameObject interactPanel;
 
     private PlayerHealth playerHealth;
 
@@ -15,7 +15,7 @@ public class PlayerPushPull : MonoBehaviour
     {
         player = GetComponent<PlayerVar>();
         playerHealth = GetComponent<PlayerHealth>();
-        interactPanel.SetActive(false); 
+        interactPanel.SetActive(false);
     }
 
     void Update()
@@ -52,7 +52,15 @@ public class PlayerPushPull : MonoBehaviour
 
         if (player.isGrabbing && currentObject != null)
         {
-            MoveObject();
+            BoxGroundCheck boxGroundCheck = currentObject.GetComponent<BoxGroundCheck>();
+            if (boxGroundCheck != null && !boxGroundCheck.IsGrounded()) 
+            {
+                ReleaseGrab();
+            }
+            else
+            {
+                MoveObject();
+            }
         }
 
         if (!player.isGrounded)
