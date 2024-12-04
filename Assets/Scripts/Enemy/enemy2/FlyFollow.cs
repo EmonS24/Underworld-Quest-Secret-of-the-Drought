@@ -7,7 +7,7 @@ public class FlyFollow : MonoBehaviour
     public float speed;
     public float chaseSpeed;
     public float lineOfSite;
-    public Transform[] patrolPoints; 
+    public Transform[] patrolPoints;
 
     private int patrolIndex = 0; 
     private float patrolWaitCounter;
@@ -19,7 +19,7 @@ public class FlyFollow : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerVar>(); 
+        player = FindObjectOfType<PlayerVar>();
     }
 
     void Update()
@@ -28,7 +28,13 @@ public class FlyFollow : MonoBehaviour
 
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
-        if (distanceFromPlayer < lineOfSite && !player.isDeath && !isOnCooldown)
+        if (isOnCooldown)
+        {
+            isChasing = false;
+            return;
+        }
+
+        if (distanceFromPlayer < lineOfSite && !player.isDeath)
         {
             isChasing = true;
         }

@@ -30,7 +30,7 @@ public class PlayerClimb : MonoBehaviour
 
     private void CheckForLedge()
     {
-        if (ledgeDetected && canGrabLedge && !player.isGrounded && !player.isGrabbing)
+        if (ledgeDetected && canGrabLedge && player.isJumping && !player.isGrabbing)
         {
             canGrabLedge = false;
 

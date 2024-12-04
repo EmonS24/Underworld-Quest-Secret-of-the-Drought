@@ -14,8 +14,9 @@ public class LeafhopperDamage : MonoBehaviour
     public Collider2D attackTrigger;
     public Collider2D damageTrigger;
 
-    private bool canDamage = true;  
-    public float damageCooldown;  
+    private bool canDamage = true;
+    public float damageCooldown;
+
     void Start()
     {
         player = FindObjectOfType<PlayerVar>();
@@ -23,9 +24,17 @@ public class LeafhopperDamage : MonoBehaviour
         LeafhopperMov = GetComponent<LeafhopperMov>();
     }
 
+    void Update()
+    {
+        if (!damageTrigger.IsTouching(player.GetComponent<Collider2D>()))
+        {
+            Leafhopper.isAttack = false;
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerVar>() != null && !player.isDeath && canDamage)
+        if (collision.GetComponent<PlayerVar>() != null && !player.isDeath)
         {
             Leafhopper.isAttack = true;
         }
@@ -33,22 +42,27 @@ public class LeafhopperDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerVar>() != null && damageTrigger.IsTouching(collision) && !player.isDeath)
+        if (collision.GetComponent<PlayerVar>() != null && !player.isDeath)
         {
-            playerHp.TakeDamage(damage);
-            playerMov.KBCounter = playerMov.KBCTotalTime;
+            Leafhopper.isAttack = true;
 
-            if (collision.transform.position.x <= transform.position.x)
+            if (damageTrigger.IsTouching(collision) && canDamage)
             {
-                playerMov.KnockFromRight = true;
-            }
-            else
-            {
-                playerMov.KnockFromRight = false;
-            }
+                playerHp.TakeDamage(damage);
+                playerMov.KBCounter = playerMov.KBCTotalTime;
 
-            LeafhopperMov.StartChaseCooldown();
-            StartCoroutine(DamageCooldown());
+                if (collision.transform.position.x <= transform.position.x)
+                {
+                    playerMov.KnockFromRight = true;
+                }
+                else
+                {
+                    playerMov.KnockFromRight = false;
+                }
+
+                LeafhopperMov.StartChaseCooldown();
+                StartCoroutine(DamageCooldown());
+            }
         }
     }
 
@@ -63,7 +77,8 @@ public class LeafhopperDamage : MonoBehaviour
     private IEnumerator DamageCooldown()
     {
         canDamage = false;
-        yield return new WaitForSeconds(damageCooldown);  
-        canDamage = true;  
+        yield return new WaitForSeconds(damageCooldown);
+        canDamage = true;
     }
+
 }

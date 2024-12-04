@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingEnemyDamage : MonoBehaviour
+public class FlyDamage : MonoBehaviour
 {
     public float damage;
     public PlayerHealth playerHp;

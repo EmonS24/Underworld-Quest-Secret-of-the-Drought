@@ -8,14 +8,14 @@ public class Lever : MonoBehaviour
     public Sprite leverActiveSprite;
     public Sprite leverInactiveSprite;
     private SpriteRenderer spriteRenderer;
-    private bool isActive = false;
+    private bool isActive = true;
     private bool isPlayerInTrigger = false;
     [SerializeField] private GameObject interactPanel;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = leverInactiveSprite;
+        spriteRenderer.sprite = leverActiveSprite;
     }
 
     private void Update()
