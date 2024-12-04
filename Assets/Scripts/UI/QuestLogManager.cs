@@ -26,12 +26,12 @@ public class QuestLogManager : MonoBehaviour
     public void SetQuestProgress(int progress)
     {
         questProgress = progress;
-        UpdateQuest($"Collect Items: {questProgress}/4"); 
+        UpdateQuest($"Collect Items: {questProgress}/5"); 
     }
 
     public void LoadQuestProgress(int progress)
     {
         questProgress = progress;
-        UpdateQuest($"Collect Items: {questProgress}/4");
+        UpdateQuest($"Collect Items: {questProgress}/5");
     }
 }

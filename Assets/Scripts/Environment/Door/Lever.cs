@@ -10,7 +10,7 @@ public class Lever : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isActive = true;
     private bool isPlayerInTrigger = false;
-    [SerializeField] private GameObject interactPanel;
+
 
     private void Start()
     {
@@ -47,7 +47,6 @@ public class Lever : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInTrigger = true;
-            interactPanel.SetActive(true);
         }
     }
 
@@ -56,7 +55,6 @@ public class Lever : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInTrigger = false;
-            interactPanel.SetActive(false);
         }
     }
 }
