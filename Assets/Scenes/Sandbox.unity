@@ -9707,6 +9707,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1659575432}
     - target: {fileID: 2945399081407769938, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
+      propertyPath: nextSceneName
+      value: Cutscene3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945399081407769938, guid: 334c540cf4467a84e96382c9fd1b63d6, type: 3}
       propertyPath: questLogManager
       value: 
       objectReference: {fileID: 748414645}
