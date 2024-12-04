@@ -7,7 +7,6 @@ public class PlayerPushPull : MonoBehaviour
     private GameObject currentObject;
     private Vector2 offset;
     private PlayerVar player;
-    [SerializeField] private GameObject interactPanel;
 
     private PlayerHealth playerHealth;
 
@@ -15,7 +14,6 @@ public class PlayerPushPull : MonoBehaviour
     {
         player = GetComponent<PlayerVar>();
         playerHealth = GetComponent<PlayerHealth>();
-        interactPanel.SetActive(false);
     }
 
     void Update()
@@ -85,7 +83,6 @@ public class PlayerPushPull : MonoBehaviour
         {
             currentObject = collision.gameObject;
             offset = (Vector2)(currentObject.transform.position - transform.position);
-            interactPanel.SetActive(true);
         }
     }
 
@@ -108,7 +105,6 @@ public class PlayerPushPull : MonoBehaviour
         if (collision.CompareTag("Pushable"))
         {
             currentObject = null;
-            interactPanel.SetActive(false);
 
             if (player.isGrabbing)
             {

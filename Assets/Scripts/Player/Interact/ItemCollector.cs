@@ -6,18 +6,17 @@ public class ItemCollector : MonoBehaviour
     private GameObject currentItem;
     private PlayerVar player;
 
-    public int totalItems = 4;
+    public int totalItems = 5;
     private int itemsCollected = 0;
     public string nextSceneName;
 
     public QuestLogManager questLogManager;
     public CheckpointManager checkpointManager;
 
-    [SerializeField] private GameObject interactPanel; 
+
     void Start()
     {
         player = GetComponent<PlayerVar>();
-        interactPanel.SetActive(false); 
     }
 
     void Update()
@@ -51,7 +50,6 @@ public class ItemCollector : MonoBehaviour
                 }
 
                 currentItem = null;
-                interactPanel.SetActive(false);
             }
         }
     }
@@ -61,7 +59,6 @@ public class ItemCollector : MonoBehaviour
         if (collision.CompareTag("Collectable"))
         {
             currentItem = collision.gameObject;
-            interactPanel.SetActive(true); 
         }
     }
 
@@ -70,12 +67,25 @@ public class ItemCollector : MonoBehaviour
         if (collision.CompareTag("Collectable"))
         {
             currentItem = null;
-            interactPanel.SetActive(false); 
         }
     }
 
     private void LoadNextScene()
     {
+        itemsCollected = 0;
+        checkpointManager.ResetCollectedItems(); 
+        questLogManager.SetQuestProgress(0); 
+
         SceneManager.LoadScene(nextSceneName);
+    }
+    
+    public void SetItemsCollected(int progress)
+    {
+        itemsCollected = progress;
+
+        if (questLogManager != null)
+        {
+            questLogManager.SetQuestProgress(itemsCollected);
+        }
     }
 }

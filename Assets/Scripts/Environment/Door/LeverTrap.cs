@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverTrao : MonoBehaviour
+public class LeverTrap : MonoBehaviour
 {
     public DoorControllerTrap door;
     public Sprite leverActiveSprite;
@@ -10,12 +10,11 @@ public class LeverTrao : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isActive = false;
     private bool isPlayerInTrigger = false;
-    [SerializeField] private GameObject interactPanel;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = leverInactiveSprite;
+        spriteRenderer.sprite = leverActiveSprite;
     }
 
     private void Update()
@@ -47,7 +46,6 @@ public class LeverTrao : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInTrigger = true;
-            interactPanel.SetActive(true);
         }
     }
 
@@ -56,7 +54,6 @@ public class LeverTrao : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInTrigger = false;
-            interactPanel.SetActive(false);
         }
     }
 }
