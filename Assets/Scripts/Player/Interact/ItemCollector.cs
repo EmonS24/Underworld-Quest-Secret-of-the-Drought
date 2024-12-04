@@ -6,7 +6,7 @@ public class ItemCollector : MonoBehaviour
     private GameObject currentItem;
     private PlayerVar player;
 
-    public int totalItems = 4;
+    public int totalItems = 5;
     private int itemsCollected = 0;
     public string nextSceneName;
 
@@ -14,6 +14,7 @@ public class ItemCollector : MonoBehaviour
     public CheckpointManager checkpointManager;
 
     [SerializeField] private GameObject interactPanel; 
+
     void Start()
     {
         player = GetComponent<PlayerVar>();
@@ -76,6 +77,20 @@ public class ItemCollector : MonoBehaviour
 
     private void LoadNextScene()
     {
+        itemsCollected = 0;
+        checkpointManager.ResetCollectedItems(); 
+        questLogManager.SetQuestProgress(0); 
+
         SceneManager.LoadScene(nextSceneName);
+    }
+    
+    public void SetItemsCollected(int progress)
+    {
+        itemsCollected = progress;
+
+        if (questLogManager != null)
+        {
+            questLogManager.SetQuestProgress(itemsCollected);
+        }
     }
 }

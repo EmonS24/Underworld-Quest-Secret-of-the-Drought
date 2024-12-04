@@ -56,6 +56,22 @@ public class CheckpointManager : MonoBehaviour
                 BinaryFormatter formatter = new BinaryFormatter();
                 CheckpointData checkpointData = (CheckpointData)formatter.Deserialize(file);
 
+                // Memuat posisi pemain
+                Vector2 playerPosition = new Vector2(checkpointData.posX, checkpointData.posY);
+                GameObject player = GameObject.FindWithTag("Player");
+                if (player != null)
+                {
+                    player.transform.position = playerPosition;
+                }
+
+                // Memuat progress quest
+                ItemCollector itemCollector = FindObjectOfType<ItemCollector>();
+                if (itemCollector != null)
+                {
+                    itemCollector.SetItemsCollected(checkpointData.questProgress);
+                }
+
+                // Memuat collected items
                 if (checkpointData.collectedItems != null)
                 {
                     foreach (string itemID in checkpointData.collectedItems)
@@ -65,12 +81,13 @@ public class CheckpointManager : MonoBehaviour
                         {
                             if (item.itemID == itemID)
                             {
-                                item.gameObject.SetActive(false); 
+                                item.gameObject.SetActive(false);
                             }
                         }
                     }
                 }
 
+                // Memuat posisi objek yang bisa dipindahkan
                 if (checkpointData.pushableObjectPositions != null)
                 {
                     foreach (var objData in checkpointData.pushableObjectPositions)
@@ -83,11 +100,12 @@ public class CheckpointManager : MonoBehaviour
                     }
                 }
 
+                // Memuat health pemain
                 PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
                 if (playerHealth != null)
                 {
-                    playerHealth.health = checkpointData.playerHealth; 
-                    playerHealth.AddHealth(0); 
+                    playerHealth.health = checkpointData.playerHealth;
+                    playerHealth.AddHealth(0);
                 }
 
                 Debug.Log($"Checkpoint loaded from {checkpointFilePath}");
@@ -101,6 +119,21 @@ public class CheckpointManager : MonoBehaviour
 
         return null;
     }
+
+    public int GetSavedQuestProgress()
+    {
+        if (File.Exists(checkpointFilePath))
+        {
+            using (FileStream file = File.Open(checkpointFilePath, FileMode.Open))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                CheckpointData checkpointData = (CheckpointData)formatter.Deserialize(file);
+                return checkpointData.questProgress; // Ambil progress quest dari checkpoint
+            }
+        }
+        return 0; // Jika tidak ada checkpoint, kembalikan 0
+    }
+
 
     public void LoadCollectedItems(string[] collectedItems)
     {
@@ -119,6 +152,13 @@ public class CheckpointManager : MonoBehaviour
             Debug.Log("No checkpoint file to clear.");
         }
     }
+
+    public void ResetCollectedItems()
+    {
+        collectedItemIDs.Clear(); 
+        Debug.Log("Collected items reset.");
+    }
+
 
     private PushableObject FindPushableObjectByID(string objectID)
     {
