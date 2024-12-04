@@ -75,7 +75,7 @@ public class ItemCollector : MonoBehaviour
         itemsCollected = 0;
         checkpointManager.ResetCollectedItems(); 
         questLogManager.SetQuestProgress(0); 
-
+        checkpointManager.ClearCheckpoint();
         SceneManager.LoadScene(nextSceneName);
     }
     

@@ -8,14 +8,14 @@ public class Lever : MonoBehaviour
     public Sprite leverActiveSprite;
     public Sprite leverInactiveSprite;
     private SpriteRenderer spriteRenderer;
-    private bool isActive = true;
+    private bool isActive = false;
     private bool isPlayerInTrigger = false;
 
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = leverActiveSprite;
+        spriteRenderer.sprite = leverInactiveSprite;
     }
 
     private void Update()

@@ -56,7 +56,6 @@ public class CheckpointManager : MonoBehaviour
                 BinaryFormatter formatter = new BinaryFormatter();
                 CheckpointData checkpointData = (CheckpointData)formatter.Deserialize(file);
 
-                // Memuat posisi pemain
                 Vector2 playerPosition = new Vector2(checkpointData.posX, checkpointData.posY);
                 GameObject player = GameObject.FindWithTag("Player");
                 if (player != null)
@@ -64,14 +63,12 @@ public class CheckpointManager : MonoBehaviour
                     player.transform.position = playerPosition;
                 }
 
-                // Memuat progress quest
                 ItemCollector itemCollector = FindObjectOfType<ItemCollector>();
                 if (itemCollector != null)
                 {
                     itemCollector.SetItemsCollected(checkpointData.questProgress);
                 }
 
-                // Memuat collected items
                 if (checkpointData.collectedItems != null)
                 {
                     foreach (string itemID in checkpointData.collectedItems)
@@ -87,7 +84,6 @@ public class CheckpointManager : MonoBehaviour
                     }
                 }
 
-                // Memuat posisi objek yang bisa dipindahkan
                 if (checkpointData.pushableObjectPositions != null)
                 {
                     foreach (var objData in checkpointData.pushableObjectPositions)
@@ -100,7 +96,6 @@ public class CheckpointManager : MonoBehaviour
                     }
                 }
 
-                // Memuat health pemain
                 PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
                 if (playerHealth != null)
                 {
@@ -128,10 +123,10 @@ public class CheckpointManager : MonoBehaviour
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 CheckpointData checkpointData = (CheckpointData)formatter.Deserialize(file);
-                return checkpointData.questProgress; // Ambil progress quest dari checkpoint
+                return checkpointData.questProgress; 
             }
         }
-        return 0; // Jika tidak ada checkpoint, kembalikan 0
+        return 0; 
     }
 
 
