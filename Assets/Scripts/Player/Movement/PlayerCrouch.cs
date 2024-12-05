@@ -27,7 +27,7 @@ public class PlayerCrouch : MonoBehaviour
 
     private void HandleCrouch()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             if (player.isCrouching)
             {

@@ -6,17 +6,25 @@ using TMPro;
 
 public class BoxPanel : MonoBehaviour
 {
-
     public GameObject interactionPrompt;
     [SerializeField] private PlayerVar playerVar;
 
-
     public float interactionRange = 3f;
     public Transform player;
+    public float fadeDuration = 0.1f;
+
+    private CanvasGroup canvasGroup;
+    private Coroutine fadeCoroutine;
 
     void Start()
     {
-        interactionPrompt.SetActive(false);
+        canvasGroup = interactionPrompt.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = interactionPrompt.AddComponent<CanvasGroup>();
+        }
+        canvasGroup.alpha = 0f;
+        interactionPrompt.SetActive(true);
     }
 
     void Update()
@@ -25,13 +33,38 @@ public class BoxPanel : MonoBehaviour
 
         if (distance <= interactionRange && !playerVar.isGrabbing)
         {
-            interactionPrompt.SetActive(true);
-
+            FadeIn();
         }
         else
         {
-            interactionPrompt.SetActive(false);
+            FadeOut();
         }
+    }
+
+    private void FadeIn()
+    {
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeCanvasGroup(canvasGroup, canvasGroup.alpha, 1f));
+    }
+
+    private void FadeOut()
+    {
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeCanvasGroup(canvasGroup, canvasGroup.alpha, 0f));
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float startAlpha, float endAlpha)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / fadeDuration);
+            yield return null;
+        }
+
+        cg.alpha = endAlpha;
     }
 
     private void OnDrawGizmosSelected()
