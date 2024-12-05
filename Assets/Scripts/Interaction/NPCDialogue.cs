@@ -36,18 +36,14 @@ public class NPCDialogue : MonoBehaviour
         if (distance <= interactionRange)
         {
             isPlayerInRange = true;
-            interactionPrompt.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (!dialogueUI.activeInHierarchy)
             {
-                if (dialogueUI.activeInHierarchy)
-                {
-                    nextButton.gameObject.SetActive(true);
-                }
-                else
-                {
-                    StartDialogue();
-                }
+                interactionPrompt.SetActive(true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && !dialogueUI.activeInHierarchy)
+            {
+                StartDialogue();
             }
         }
         else
@@ -104,7 +100,10 @@ public class NPCDialogue : MonoBehaviour
     {
         dialogueUI.SetActive(false);
         nextButton.gameObject.SetActive(false);
-        interactionPrompt.SetActive(true);
+        if (isPlayerInRange)
+        {
+            interactionPrompt.SetActive(true);
+        }
         ResetDialogueState();
     }
 
