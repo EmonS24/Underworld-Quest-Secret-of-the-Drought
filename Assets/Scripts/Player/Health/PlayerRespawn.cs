@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class PlayerRespawn : MonoBehaviour
@@ -22,11 +23,11 @@ public class PlayerRespawn : MonoBehaviour
         startPos = transform.position;
 
         respawnPanel.SetActive(false);
-        respawnCanvasGroup = respawnPanel.GetComponent<CanvasGroup>(); 
-        respawnCanvasGroup.alpha = 0f;  
+        respawnCanvasGroup = respawnPanel.GetComponent<CanvasGroup>();
+        respawnCanvasGroup.alpha = 0f;
 
         checkpointManager = FindObjectOfType<CheckpointManager>();
-        questLogManager = FindObjectOfType<QuestLogManager>(); 
+        questLogManager = FindObjectOfType<QuestLogManager>();
 
         LoadCheckpoint();
     }
@@ -48,22 +49,22 @@ public class PlayerRespawn : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
         respawnPanel.SetActive(true);
-        StartCoroutine(FadeInRespawnPanel());  
+        StartCoroutine(FadeInRespawnPanel());
     }
 
     private IEnumerator FadeInRespawnPanel()
     {
         float timeElapsed = 0f;
-        float fadeDuration = 1f;  
+        float fadeDuration = 1f;
 
         while (timeElapsed < fadeDuration)
         {
             timeElapsed += Time.deltaTime;
-            respawnCanvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);  
+            respawnCanvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);
             yield return null;
         }
 
-        respawnCanvasGroup.alpha = 1f;  
+        respawnCanvasGroup.alpha = 1f;
     }
 
     private void CheckRespawn()
@@ -85,13 +86,13 @@ public class PlayerRespawn : MonoBehaviour
             transform.position = startPos;
         }
 
-        StartCoroutine(FadeOutRespawnPanel());  
+        StartCoroutine(FadeOutRespawnPanel());
     }
 
     private IEnumerator FadeOutRespawnPanel()
     {
         float timeElapsed = 0f;
-        float fadeDuration = 1f;  
+        float fadeDuration = 1f;
 
         while (timeElapsed < fadeDuration)
         {
@@ -100,35 +101,69 @@ public class PlayerRespawn : MonoBehaviour
             yield return null;
         }
 
-        respawnCanvasGroup.alpha = 0f;  
-        respawnPanel.SetActive(false);  
+        respawnCanvasGroup.alpha = 0f;
+        respawnPanel.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Checkpoint"))
         {
+            Animator checkpointAnimator = collision.GetComponent<Animator>();
+            if (checkpointAnimator != null)
+                checkpointAnimator.SetTrigger("Activate");
+
+            Light2D checkpointLight = collision.GetComponentInChildren<Light2D>();
+            if (checkpointLight != null)
+                StartCoroutine(FadeInLight(checkpointLight));
+
             Vector2 checkpointPosition = collision.transform.position;
             string sceneName = SceneManager.GetActiveScene().name;
-            int currentQuestProgress = questLogManager.GetQuestProgress(); 
-            checkpointManager.SaveCheckpoint(sceneName, checkpointPosition, currentQuestProgress, health.health); 
-            health.AddHealth(health.maxHealth); 
+            int currentQuestProgress = questLogManager.GetQuestProgress();
+            checkpointManager.SaveCheckpoint(sceneName, checkpointPosition, currentQuestProgress, health.health);
+            health.AddHealth(health.maxHealth);
+
+            Collider2D checkpointCollider = collision.GetComponent<Collider2D>();
+            if (checkpointCollider != null)
+            {
+                checkpointCollider.enabled = false;
+            }
         }
+    }
+
+    private IEnumerator FadeInLight(Light2D light)
+    {
+        float timeElapsed = 0f;
+        float fadeDuration = 1f;
+        float startIntensity = 0f;
+        float targetIntensity = light.intensity;
+
+        light.intensity = startIntensity;
+        light.enabled = true;
+
+        while (timeElapsed < fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            light.intensity = Mathf.Lerp(startIntensity, targetIntensity, timeElapsed / fadeDuration);
+            yield return null;
+        }
+
+        light.intensity = targetIntensity;
     }
 
     private void LoadCheckpoint()
     {
         CheckpointData checkpointData = checkpointManager.LoadCheckpoint();
-        
+
         if (checkpointData != null && checkpointData.sceneName == SceneManager.GetActiveScene().name)
         {
             transform.position = new Vector2(checkpointData.posX, checkpointData.posY);
-            questLogManager.LoadQuestProgress(checkpointData.questProgress); 
+            questLogManager.LoadQuestProgress(checkpointData.questProgress);
             checkpointManager.LoadCollectedItems(checkpointData.collectedItems);
         }
         else
         {
-            transform.position = startPos; 
+            transform.position = startPos;
         }
     }
 }

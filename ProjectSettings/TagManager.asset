@@ -115,6 +115,9 @@ TagManager:
   - name: EnemyType1
     uniqueID: 673110175
     locked: 0
+  - name: Checkpoint
+    uniqueID: 909835783
+    locked: 0
   - name: PlayerUw
     uniqueID: 2697041807
     locked: 0
