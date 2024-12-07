@@ -488,6 +488,9 @@ PrefabInstance:
     - {fileID: 238967169509836616, guid: 809260940bd9dfb4a95425876a577bec, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 426724037998264220, guid: 809260940bd9dfb4a95425876a577bec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 32706214}
     - targetCorrespondingSourceObject: {fileID: 477683136535505777, guid: 809260940bd9dfb4a95425876a577bec, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1379075692}
@@ -500,6 +503,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2243057920369181492, guid: 809260940bd9dfb4a95425876a577bec, type: 3}
   m_PrefabInstance: {fileID: 32706211}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &32706213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 426724037998264220, guid: 809260940bd9dfb4a95425876a577bec, type: 3}
+  m_PrefabInstance: {fileID: 32706211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &32706214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32706213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abcf3ac1fd24a0742bf7a72f7d117ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 0}
+  dialogueText: {fileID: 0}
+  portraitImage: {fileID: 0}
+  dialogue: []
+  index: 0
+  contButton: {fileID: 0}
+  wordSpeed: 0
+  playerIsClose: 0
 --- !u!1001 &68220572
 PrefabInstance:
   m_ObjectHideFlags: 0
