@@ -12,11 +12,12 @@ public class LeafhopperMov : MonoBehaviour
     public int patrolDestination;
 
     public Transform detectionArea;
-    public Vector2 detectionSize;
+    public Vector2 detectionSizePositive; // Ukuran positif
+    public Vector2 detectionSizeNegative; // Ukuran negatif
     public LayerMask playerLayer;
 
-    private bool isOnCooldown = false;  
-    public float chaseCooldownTime;  
+    private bool isOnCooldown = false;
+    public float chaseCooldownTime;
 
     void Start()
     {
@@ -26,7 +27,16 @@ public class LeafhopperMov : MonoBehaviour
 
     void Update()
     {
-        bool playerInDetection = Physics2D.OverlapBox(detectionArea.position, detectionSize, 0, playerLayer);
+        // Hitung offset deteksi berdasarkan ukuran positif dan negatif
+        Vector3 positiveOffset = new Vector3(detectionSizePositive.x / 2, 0, 0);
+        Vector3 negativeOffset = new Vector3(-detectionSizeNegative.x / 2, 0, 0);
+
+        // Deteksi area kanan dan kiri secara terpisah
+        bool playerInPositiveDetection = Physics2D.OverlapBox(detectionArea.position + positiveOffset, detectionSizePositive, 0, playerLayer);
+        bool playerInNegativeDetection = Physics2D.OverlapBox(detectionArea.position + negativeOffset, detectionSizeNegative, 0, playerLayer);
+
+        // Kombinasikan hasil deteksi
+        bool playerInDetection = playerInPositiveDetection || playerInNegativeDetection;
 
         if (Leafhopper.isChasing && !isOnCooldown)
         {
@@ -110,7 +120,14 @@ public class LeafhopperMov : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(detectionArea.position, detectionSize);
+        // Hitung offset untuk Gizmos
+        Vector3 positiveOffset = new Vector3(detectionSizePositive.x / 2, 0, 0);
+        Vector3 negativeOffset = new Vector3(-detectionSizeNegative.x / 2, 0, 0);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(detectionArea.position + positiveOffset, detectionSizePositive);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(detectionArea.position + negativeOffset, detectionSizeNegative);
     }
 }

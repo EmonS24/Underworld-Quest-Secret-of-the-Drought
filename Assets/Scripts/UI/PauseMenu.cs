@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     AudioManager audioManager;
+  
 
 
     private void Awake()
@@ -22,7 +23,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Home()
     {
-        audioManager.PlaySFX(audioManager.buttonClick);
         SceneManager.LoadSceneAsync(0);
     }
 

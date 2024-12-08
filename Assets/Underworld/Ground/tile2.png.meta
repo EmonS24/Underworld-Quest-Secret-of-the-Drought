@@ -113,10 +113,10 @@ TextureImporter:
       name: terrain underworld 256 x 256 (1)_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 96
-        width: 77
-        height: 43
+        x: 87
+        y: 101
+        width: 74
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -223,7 +223,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1497676466510815725, guid: 77e733f35f3e9ee4dbfd28760e047241, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -580,7 +580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 709.35, y: -440.25}
+  m_AnchoredPosition: {x: 700, y: -380}
   m_SizeDelta: {x: 200.5, y: 81.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1174042971
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415ab8e45f676994ea2651692ea09a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Sandbox
+  nextSceneName: ParallaxTest
   loadingScreen: {fileID: 1773812917}
   loadingSlider: {fileID: 2017400296}
   skipButton: {fileID: 1174042972}
@@ -959,8 +959,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.2, y: -2.6}
-  m_SizeDelta: {x: 2003.21, y: 1276.62}
+  m_AnchoredPosition: {x: -0.000099182, y: 0.00056648}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555454875
 MonoBehaviour:
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e4dfd23ad21e04a98611e66044ad4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Sandbox
+  nextSceneName: ParallaxTest
   loadingScreen: {fileID: 1773812917}
   loadingSlider: {fileID: 2017400296}
 --- !u!328 &1555454876
@@ -985,7 +985,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555454873}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9f41b644d9fea1f4c9e05ce478eca7d6, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 9eae906b91c132c40902c7edb557d32e, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -994,7 +994,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 3
   m_DataSource: 0
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
@@ -1004,7 +1004,7 @@ VideoPlayer:
   m_DirectAudioVolumes:
   - 1
   m_Url: 
-  m_EnabledAudioTracks: 00
+  m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
@@ -1195,7 +1195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0029296875, y: -10.368164}
+  m_AnchoredPosition: {x: -0.0029296875, y: -10.368652}
   m_SizeDelta: {x: 2688, y: 1561.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1773812919
