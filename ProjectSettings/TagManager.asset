@@ -12,6 +12,14 @@ TagManager:
   - Checkpoint
   - Collectable
   - Elevator
+  - Room3
+  - Room4
+  - Room7
+  - Room2
+  - Room5
+  - Room6
+  - Room1
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -85,6 +93,9 @@ TagManager:
   - name: Ground
     uniqueID: 3043946067
     locked: 0
+  - name: Checkpoint
+    uniqueID: 909835783
+    locked: 0
   - name: Player
     uniqueID: 3060759495
     locked: 0
@@ -112,11 +123,11 @@ TagManager:
   - name: uw4
     uniqueID: 1145979819
     locked: 0
+  - name: CekUW
+    uniqueID: 304825825
+    locked: 0
   - name: EnemyType1
     uniqueID: 673110175
-    locked: 0
-  - name: Checkpoint
-    uniqueID: 909835783
     locked: 0
   - name: PlayerUw
     uniqueID: 2697041807

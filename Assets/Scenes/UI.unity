@@ -3310,7 +3310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1860054541}
   SFXSource: {fileID: 1982736958}
-  background: {fileID: 8300000, guid: c34497c41ea077b4b8e6262497be82fc, type: 3}
+  background: {fileID: 8300000, guid: 1494a704fefcd0e4798659ddc8f1728f, type: 3}
   buttonClick: {fileID: 8300000, guid: 854ffcc793fea8841aacfc375dee6353, type: 3}
   footsteps: {fileID: 8300000, guid: d30f0ed1d3a38794ba244e88d5c688be, type: 3}
   jumpStep: {fileID: 8300000, guid: 878163290e01aa74cb053c3551271b64, type: 3}

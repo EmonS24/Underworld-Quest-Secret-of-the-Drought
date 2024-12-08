@@ -36,7 +36,6 @@ public class DoorController : MonoBehaviour
                 }
                 else
                 {
-                    // Raycast ke kiri
                     if (!Physics.Raycast(transform.position, Vector3.left, moveDistance, obstacleLayer) &&
                         transform.position.x > initialPosition.x - moveDistance)
                     {
@@ -48,7 +47,6 @@ public class DoorController : MonoBehaviour
             {
                 if (moveDirectionUp)
                 {
-                    // Raycast ke atas
                     if (!Physics.Raycast(transform.position, Vector3.up, moveDistance, obstacleLayer) &&
                         transform.position.y < initialPosition.y + moveDistance)
                     {
@@ -57,7 +55,6 @@ public class DoorController : MonoBehaviour
                 }
                 else
                 {
-                    // Raycast ke bawah
                     if (!Physics.Raycast(transform.position, Vector3.down, moveDistance, obstacleLayer) &&
                         transform.position.y > initialPosition.y - moveDistance)
                     {

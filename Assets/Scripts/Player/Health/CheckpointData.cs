@@ -8,8 +8,9 @@ public class CheckpointData
     public string[] collectedItems;
     public PushableObjectData[] pushableObjectPositions;
     public float playerHealth;
+    public string currentRoomName;
 
-    public CheckpointData(string sceneName, float posX, float posY, int questProgress, string[] collectedItems, PushableObjectData[] pushableObjectPositions, float playerHealth)
+    public CheckpointData(string sceneName, float posX, float posY, int questProgress, string[] collectedItems, PushableObjectData[] pushableObjectPositions, float playerHealth, string currentRoomName)
     {
         this.sceneName = sceneName;
         this.posX = posX;
@@ -18,9 +19,9 @@ public class CheckpointData
         this.collectedItems = collectedItems;
         this.pushableObjectPositions = pushableObjectPositions;
         this.playerHealth = playerHealth;
+        this.currentRoomName = currentRoomName;
     }
 }
-
 
 [System.Serializable]
 public class PushableObjectData

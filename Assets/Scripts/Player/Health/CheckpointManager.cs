@@ -1,17 +1,19 @@
+using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
     private string checkpointFilePath;
     private List<string> collectedItemIDs = new List<string>();
     private List<PushableObjectData> pushableObjectPositions = new List<PushableObjectData>();
+    private RoomCameraManager roomCameraManager;
 
     private void Awake()
     {
         checkpointFilePath = Path.Combine(Application.persistentDataPath, "checkpoint.dat");
+        roomCameraManager = FindObjectOfType<RoomCameraManager>();
     }
 
     public void SaveCheckpoint(string sceneName, Vector2 position, int questProgress, float playerHealth)
@@ -21,6 +23,8 @@ public class CheckpointManager : MonoBehaviour
             pushableObjectPositions.Add(new PushableObjectData(pushableObject.objectID, pushableObject.transform.position.x, pushableObject.transform.position.y));
         }
 
+        string currentRoomName = roomCameraManager != null ? roomCameraManager.GetCurrentRoomName() : null;
+
         CheckpointData checkpointData = new CheckpointData(
             sceneName,
             position.x,
@@ -28,7 +32,8 @@ public class CheckpointManager : MonoBehaviour
             questProgress,
             collectedItemIDs.ToArray(),
             pushableObjectPositions.ToArray(),
-            playerHealth
+            playerHealth,
+            currentRoomName
         );
 
         using (FileStream file = File.Create(checkpointFilePath))
@@ -37,14 +42,6 @@ public class CheckpointManager : MonoBehaviour
             formatter.Serialize(file, checkpointData);
         }
         Debug.Log($"Checkpoint saved successfully at {checkpointFilePath}");
-    }
-
-    public void AddCollectedItem(string itemID)
-    {
-        if (!collectedItemIDs.Contains(itemID))
-        {
-            collectedItemIDs.Add(itemID);
-        }
     }
 
     public CheckpointData LoadCheckpoint()
@@ -61,6 +58,11 @@ public class CheckpointManager : MonoBehaviour
                 if (player != null)
                 {
                     player.transform.position = playerPosition;
+                }
+
+                if (roomCameraManager != null && checkpointData.currentRoomName != null)
+                {
+                    roomCameraManager.SwitchToRoom(checkpointData.currentRoomName);
                 }
 
                 ItemCollector itemCollector = FindObjectOfType<ItemCollector>();
@@ -115,6 +117,15 @@ public class CheckpointManager : MonoBehaviour
         return null;
     }
 
+    public void AddCollectedItem(string itemID)
+    {
+        if (!collectedItemIDs.Contains(itemID))
+        {
+            collectedItemIDs.Add(itemID);
+            Debug.Log($"Item {itemID} added to collected items.");
+        }
+    }
+
     public int GetSavedQuestProgress()
     {
         if (File.Exists(checkpointFilePath))
@@ -128,7 +139,6 @@ public class CheckpointManager : MonoBehaviour
         }
         return 0; 
     }
-
 
     public void LoadCollectedItems(string[] collectedItems)
     {
@@ -154,7 +164,6 @@ public class CheckpointManager : MonoBehaviour
         Debug.Log("Collected items reset.");
     }
 
-
     private PushableObject FindPushableObjectByID(string objectID)
     {
         PushableObject[] pushableObjects = FindObjectsOfType<PushableObject>();
@@ -168,3 +177,4 @@ public class CheckpointManager : MonoBehaviour
         return null;
     }
 }
+

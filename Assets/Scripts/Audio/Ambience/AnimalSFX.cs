@@ -11,15 +11,25 @@ public class AnimalSFX : MonoBehaviour
         StartCoroutine(PlaySFX());
     }
 
-    IEnumerator PlaySFX()
+IEnumerator PlaySFX()
+{
+    while (true)
     {
-        while (true)
+        if (audioSource == null)
         {
-            if (audioSource && audioSource.clip)
-            {
-                audioSource.Play();
-            }
-            yield return new WaitForSeconds(audioSource.clip.length + loopDelay);
+            Debug.LogError("AudioSource is missing!");
+            yield break; // Hentikan coroutine jika AudioSource tidak ada
         }
+
+        if (audioSource.clip == null)
+        {
+            Debug.LogError("AudioClip is missing on AudioSource!");
+            yield break; // Hentikan coroutine jika AudioClip tidak ada
+        }
+
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length + loopDelay);
     }
+}
+
 }

@@ -14,7 +14,7 @@ public class LeverTrap : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = leverActiveSprite;
+        spriteRenderer.sprite = leverInactiveSprite;
     }
 
     private void Update()
