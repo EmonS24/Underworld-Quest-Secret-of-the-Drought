@@ -2054,8 +2054,8 @@ MonoBehaviour:
   nameText: {fileID: 1271251609}
   leftCharacterImage: {fileID: 1145253193}
   rightCharacterImage: {fileID: 1630306556}
-  nextButton: {fileID: 0}
-  interactionPrompt: {fileID: 1931603373}
+  nextButton: {fileID: 704187276}
+  interactionPrompt: {fileID: 410484295}
   dialogues:
   - speakerName: 
     text: 
@@ -2548,6 +2548,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8350380c543d4504ba7b5ba39943c03f, type: 3}
+--- !u!114 &704187276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1506163979388678146, guid: 8350380c543d4504ba7b5ba39943c03f, type: 3}
+  m_PrefabInstance: {fileID: 704187275}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &746529545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1824530978336959669, guid: 0e9ee88705706c94e81ebbf957fc62b8, type: 3}
@@ -6276,11 +6287,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1931603373 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3530913140268140206, guid: 8350380c543d4504ba7b5ba39943c03f, type: 3}
-  m_PrefabInstance: {fileID: 704187275}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1962727004
 GameObject:
   m_ObjectHideFlags: 0
