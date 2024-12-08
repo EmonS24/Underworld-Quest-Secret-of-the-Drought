@@ -10,32 +10,51 @@ public class PlayerMonologue : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameText;
     public Image characterImage;
-    public GameObject interactionPrompt;
-    public Monologue[] monologues;
+    public Image leftCharacterImage;
+    public List<Monologue> monologues;
+    public float triggerRange = 3f;
+    public Transform player;
+    public Button nextButton;
 
     private int currentMonologueIndex = 0;
-    private bool isPlayerInRange = false;
     private bool isMonologueActive = false;
+    private bool hasTriggered = false;
 
-    void Start()
+    private void Start()
     {
         monologueUI.SetActive(false);
-        interactionPrompt.SetActive(false);
+        nextButton.gameObject.SetActive(false);
+        nextButton.onClick.AddListener(ShowNextMonologue);
     }
 
-    void StartMonologue()
+    private void Update()
     {
+        if (hasTriggered || player == null) return;
+
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance <= triggerRange && !isMonologueActive && player.CompareTag("Player"))
+        {
+            StartMonologue();
+        }
+    }
+
+    private void StartMonologue()
+    {
+        if (hasTriggered) return;
+
+        hasTriggered = true;
         isMonologueActive = true;
         currentMonologueIndex = 0;
         monologueUI.SetActive(true);
-        interactionPrompt.SetActive(false);
+        nextButton.gameObject.SetActive(true);
+        Time.timeScale = 0f;
         UpdateMonologueUI();
     }
 
-    void ShowNextMonologue()
+    public void ShowNextMonologue()
     {
         currentMonologueIndex++;
-        if (currentMonologueIndex < monologues.Length)
+        if (currentMonologueIndex < monologues.Count)
         {
             UpdateMonologueUI();
         }
@@ -45,38 +64,46 @@ public class PlayerMonologue : MonoBehaviour
         }
     }
 
-    void UpdateMonologueUI()
+    private void UpdateMonologueUI()
     {
-        nameText.text = monologues[currentMonologueIndex].speakerName;
-        dialogueText.text = monologues[currentMonologueIndex].text;
-        characterImage.sprite = monologues[currentMonologueIndex].characterSprite;
+        var currentMonologue = monologues[currentMonologueIndex];
+        nameText.text = currentMonologue.speakerName;
+        dialogueText.text = currentMonologue.text;
+        characterImage.sprite = currentMonologue.characterSprite;
+
+        if (monologues[currentMonologueIndex].isLeftSpeaker)
+        {
+            leftCharacterImage.sprite = monologues[currentMonologueIndex].characterSprite;
+            leftCharacterImage.gameObject.SetActive(true);
+            characterImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            characterImage.sprite = monologues[currentMonologueIndex].characterSprite;
+            characterImage.gameObject.SetActive(true);
+            leftCharacterImage.gameObject.SetActive(false);
+        }
     }
 
-    void EndMonologue()
+    private void EndMonologue()
     {
-        isMonologueActive = false;
+        nextButton.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+        CloseMonologue();
+    }
+
+    public void CloseMonologue()
+    {
         monologueUI.SetActive(false);
-        interactionPrompt.SetActive(false);
+        nextButton.gameObject.SetActive(true);
+        Time.timeScale = 1f;
+        characterImage.gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnDrawGizmosSelected()
     {
-        if (collision.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            if (!isMonologueActive)
-            {
-                StartMonologue();
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-        }
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, triggerRange);
     }
 }
 
@@ -86,4 +113,5 @@ public class Monologue
     public string speakerName;
     public string text;
     public Sprite characterSprite;
+    public bool isLeftSpeaker;
 }
