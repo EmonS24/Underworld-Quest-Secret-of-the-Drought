@@ -30,6 +30,7 @@ public class PlayerPushPull : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && player.isGrounded)
         {
+            Debug.Log("E key pressed");
             if (currentObject != null)
             {
                 if (player.isGrabbing)

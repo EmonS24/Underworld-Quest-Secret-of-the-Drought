@@ -29,10 +29,10 @@ public class MonologuePlayer : MonoBehaviour
 
     private void Update()
     {
-        if (hasTriggered || player == null) return;
-
         float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= triggerRange && !isMonologueActive && player.CompareTag("Player"))
+
+        // Trigger monologue if player is in range
+        if (distance <= triggerRange && !isMonologueActive && !hasTriggered && player.CompareTag("Player"))
         {
             StartMonologue();
         }
@@ -40,14 +40,12 @@ public class MonologuePlayer : MonoBehaviour
 
     private void StartMonologue()
     {
-        if (hasTriggered) return;
-
         hasTriggered = true;
         isMonologueActive = true;
         currentMonologueIndex = 0;
         monologueUI.SetActive(true);
         nextButton.gameObject.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Pause the game
         UpdateMonologueUI();
     }
 
@@ -89,7 +87,7 @@ public class MonologuePlayer : MonoBehaviour
         isMonologueActive = false;
         monologueUI.SetActive(false);
         nextButton.gameObject.SetActive(false);
-        Time.timeScale = 1f; // Resume game
+        Time.timeScale = 1f; // Resume the game
     }
 
     private void OnDrawGizmosSelected()
