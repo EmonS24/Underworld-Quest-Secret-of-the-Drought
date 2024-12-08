@@ -9,8 +9,8 @@ public class PlayerMonologue : MonoBehaviour
     public GameObject monologueUI;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameText;
-    public Image characterImage;
     public Image leftCharacterImage;
+    public Image rightCharacterImage;
     public List<Monologue> monologues;
     public float triggerRange = 3f;
     public Transform player;
@@ -53,9 +53,9 @@ public class PlayerMonologue : MonoBehaviour
 
     public void ShowNextMonologue()
     {
-        currentMonologueIndex++;
-        if (currentMonologueIndex < monologues.Count)
+        if (currentMonologueIndex < monologues.Count - 1)
         {
+            currentMonologueIndex++;
             UpdateMonologueUI();
         }
         else
@@ -69,35 +69,27 @@ public class PlayerMonologue : MonoBehaviour
         var currentMonologue = monologues[currentMonologueIndex];
         nameText.text = currentMonologue.speakerName;
         dialogueText.text = currentMonologue.text;
-        characterImage.sprite = currentMonologue.characterSprite;
 
-        if (monologues[currentMonologueIndex].isLeftSpeaker)
+        if (currentMonologue.isLeftSpeaker)
         {
-            leftCharacterImage.sprite = monologues[currentMonologueIndex].characterSprite;
+            leftCharacterImage.sprite = currentMonologue.characterSprite;
             leftCharacterImage.gameObject.SetActive(true);
-            characterImage.gameObject.SetActive(false);
+            rightCharacterImage.gameObject.SetActive(false);
         }
         else
         {
-            characterImage.sprite = monologues[currentMonologueIndex].characterSprite;
-            characterImage.gameObject.SetActive(true);
+            rightCharacterImage.sprite = currentMonologue.characterSprite;
+            rightCharacterImage.gameObject.SetActive(true);
             leftCharacterImage.gameObject.SetActive(false);
         }
     }
 
     private void EndMonologue()
     {
-        nextButton.gameObject.SetActive(false);
-        Time.timeScale = 1f;
-        CloseMonologue();
-    }
-
-    public void CloseMonologue()
-    {
+        isMonologueActive = false;
         monologueUI.SetActive(false);
-        nextButton.gameObject.SetActive(true);
-        Time.timeScale = 1f;
-        characterImage.gameObject.SetActive(false);
+        nextButton.gameObject.SetActive(false);
+        Time.timeScale = 1f; // Resume game
     }
 
     private void OnDrawGizmosSelected()
