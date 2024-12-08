@@ -59,9 +59,9 @@ public class PlayerMonologue : MonoBehaviour
         interactionPrompt.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             isPlayerInRange = true;
             if (!isMonologueActive)
@@ -71,9 +71,9 @@ public class PlayerMonologue : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             isPlayerInRange = false;
         }
