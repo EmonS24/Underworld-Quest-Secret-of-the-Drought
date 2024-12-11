@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
@@ -13,7 +12,7 @@ public class DoorController : MonoBehaviour
     public LayerMask obstacleLayer;
 
     private AudioSource audioSource;
-    public AudioClip moveSound; // Tambahkan AudioClip untuk PlayOneShot
+    public AudioClip moveSound; 
 
     void Start()
     {
@@ -111,8 +110,6 @@ public class DoorController : MonoBehaviour
                 }
             }
         }
-
-        // Jika pintu bergerak, putar suara
         if (isMoving && !audioSource.isPlaying)
         {
             audioSource.PlayOneShot(moveSound);

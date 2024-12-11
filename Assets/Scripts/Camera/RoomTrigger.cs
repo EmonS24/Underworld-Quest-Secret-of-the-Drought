@@ -23,7 +23,6 @@ public class RoomTrigger : MonoBehaviour
                 
                 string targetRoomName = (currentRoom == room1Name) ? room2Name : room1Name;
 
-               
                 cameraManager.SwitchToRoom(targetRoomName);
             }
         }

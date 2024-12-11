@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeafhopperMov : MonoBehaviour
@@ -12,8 +11,8 @@ public class LeafhopperMov : MonoBehaviour
     public int patrolDestination;
 
     public Transform detectionArea;
-    public Vector2 detectionSizePositive; // Ukuran positif
-    public Vector2 detectionSizeNegative; // Ukuran negatif
+    public Vector2 detectionSizePositive; 
+    public Vector2 detectionSizeNegative; 
     public LayerMask playerLayer;
 
     private bool isOnCooldown = false;
@@ -27,15 +26,12 @@ public class LeafhopperMov : MonoBehaviour
 
     void Update()
     {
-        // Hitung offset deteksi berdasarkan ukuran positif dan negatif
         Vector3 positiveOffset = new Vector3(detectionSizePositive.x / 2, 0, 0);
         Vector3 negativeOffset = new Vector3(-detectionSizeNegative.x / 2, 0, 0);
 
-        // Deteksi area kanan dan kiri secara terpisah
         bool playerInPositiveDetection = Physics2D.OverlapBox(detectionArea.position + positiveOffset, detectionSizePositive, 0, playerLayer);
         bool playerInNegativeDetection = Physics2D.OverlapBox(detectionArea.position + negativeOffset, detectionSizeNegative, 0, playerLayer);
 
-        // Kombinasikan hasil deteksi
         bool playerInDetection = playerInPositiveDetection || playerInNegativeDetection;
 
         if (Leafhopper.isChasing && !isOnCooldown)
@@ -120,7 +116,6 @@ public class LeafhopperMov : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Hitung offset untuk Gizmos
         Vector3 positiveOffset = new Vector3(detectionSizePositive.x / 2, 0, 0);
         Vector3 negativeOffset = new Vector3(-detectionSizeNegative.x / 2, 0, 0);
 

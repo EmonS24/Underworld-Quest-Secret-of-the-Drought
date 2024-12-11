@@ -18,13 +18,13 @@ IEnumerator PlaySFX()
         if (audioSource == null)
         {
             Debug.LogError("AudioSource is missing!");
-            yield break; // Hentikan coroutine jika AudioSource tidak ada
+            yield break; 
         }
 
         if (audioSource.clip == null)
         {
             Debug.LogError("AudioClip is missing on AudioSource!");
-            yield break; // Hentikan coroutine jika AudioClip tidak ada
+            yield break; 
         }
 
         audioSource.Play();

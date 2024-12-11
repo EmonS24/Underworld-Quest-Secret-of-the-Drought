@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LedgeDetection : MonoBehaviour
 {
     [SerializeField] private float radius;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask pushableLayer;  // Menambahkan Layer untuk Pushable
+    [SerializeField] private LayerMask pushableLayer;  
 
     [SerializeField] private PlayerClimb climb;
     [SerializeField] private PlayerVar player;
