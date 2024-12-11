@@ -30,7 +30,7 @@ public class PlayerClimb : MonoBehaviour
 
     private void CheckForLedge()
     {
-        if (ledgeDetected && canGrabLedge && player.isJumping && !player.isGrabbing)
+        if (ledgeDetected && canGrabLedge && Input.GetKey(KeyCode.Space) && !player.isGrounded && !player.isGrabbing)
         {
             canGrabLedge = false;
 

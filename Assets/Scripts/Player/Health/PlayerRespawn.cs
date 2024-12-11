@@ -16,6 +16,9 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private QuestLogManager questLogManager;
     [SerializeField] private CheckpointManager checkpointManager;
 
+    private AudioManager audioManager;
+    public AudioClip checkpointSound; 
+
     private void Start()
     {
         player = GetComponent<PlayerVar>();
@@ -28,6 +31,8 @@ public class PlayerRespawn : MonoBehaviour
 
         checkpointManager = FindObjectOfType<CheckpointManager>();
         questLogManager = FindObjectOfType<QuestLogManager>();
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
         LoadCheckpoint();
     }
@@ -52,21 +57,6 @@ public class PlayerRespawn : MonoBehaviour
         StartCoroutine(FadeInRespawnPanel());
     }
 
-    private IEnumerator FadeInRespawnPanel()
-    {
-        float timeElapsed = 0f;
-        float fadeDuration = 1f;
-
-        while (timeElapsed < fadeDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            respawnCanvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);
-            yield return null;
-        }
-
-        respawnCanvasGroup.alpha = 1f;
-    }
-
     private void CheckRespawn()
     {
         health.Respawn();
@@ -87,6 +77,21 @@ public class PlayerRespawn : MonoBehaviour
         }
 
         StartCoroutine(FadeOutRespawnPanel());
+    }
+
+    private IEnumerator FadeInRespawnPanel()
+    {
+        float timeElapsed = 0f;
+        float fadeDuration = 1f;
+
+        while (timeElapsed < fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            respawnCanvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);
+            yield return null;
+        }
+
+        respawnCanvasGroup.alpha = 1f;
     }
 
     private IEnumerator FadeOutRespawnPanel()
@@ -116,6 +121,11 @@ public class PlayerRespawn : MonoBehaviour
             Light2D checkpointLight = collision.GetComponentInChildren<Light2D>();
             if (checkpointLight != null)
                 StartCoroutine(FadeInLight(checkpointLight));
+
+            if (checkpointSound != null)
+            {
+                audioManager.PlaySFX(checkpointSound);
+            }
 
             Vector2 checkpointPosition = collision.transform.position;
             string sceneName = SceneManager.GetActiveScene().name;

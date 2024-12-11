@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
@@ -13,25 +12,30 @@ public class DoorController : MonoBehaviour
     private bool isOpen = false;
     public LayerMask obstacleLayer;
 
+    private AudioSource audioSource;
+    public AudioClip moveSound; // Tambahkan AudioClip untuk PlayOneShot
+
     void Start()
     {
         initialPosition = transform.position;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
+        bool isMoving = false;
+
         if (isOpen)
         {
             if (moveDirectionHorizontal)
             {
-
                 if (moveDirectionRight)
                 {
-
                     if (!Physics.Raycast(transform.position, Vector3.right, moveDistance, obstacleLayer) &&
                         transform.position.x < initialPosition.x + moveDistance)
                     {
                         transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
                 else
@@ -40,6 +44,7 @@ public class DoorController : MonoBehaviour
                         transform.position.x > initialPosition.x - moveDistance)
                     {
                         transform.position -= Vector3.right * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
             }
@@ -51,6 +56,7 @@ public class DoorController : MonoBehaviour
                         transform.position.y < initialPosition.y + moveDistance)
                     {
                         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
                 else
@@ -59,6 +65,7 @@ public class DoorController : MonoBehaviour
                         transform.position.y > initialPosition.y - moveDistance)
                     {
                         transform.position -= Vector3.up * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
             }
@@ -72,6 +79,7 @@ public class DoorController : MonoBehaviour
                     if (transform.position.x > initialPosition.x)
                     {
                         transform.position -= Vector3.right * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
                 else
@@ -79,6 +87,7 @@ public class DoorController : MonoBehaviour
                     if (transform.position.x < initialPosition.x)
                     {
                         transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
             }
@@ -89,6 +98,7 @@ public class DoorController : MonoBehaviour
                     if (transform.position.y > initialPosition.y)
                     {
                         transform.position -= Vector3.up * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
                 else
@@ -96,9 +106,16 @@ public class DoorController : MonoBehaviour
                     if (transform.position.y < initialPosition.y)
                     {
                         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+                        isMoving = true;
                     }
                 }
             }
+        }
+
+        // Jika pintu bergerak, putar suara
+        if (isMoving && !audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(moveSound);
         }
     }
 
@@ -114,7 +131,6 @@ public class DoorController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-
         if (moveDirectionHorizontal)
         {
             Gizmos.color = Color.green;

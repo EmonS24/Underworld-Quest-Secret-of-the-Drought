@@ -13,10 +13,13 @@ public class ItemCollector : MonoBehaviour
     public QuestLogManager questLogManager;
     public CheckpointManager checkpointManager;
 
+    private AudioManager audioManager;
+    public AudioClip collectItemSound;
 
     void Start()
     {
         player = GetComponent<PlayerVar>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -31,18 +34,19 @@ public class ItemCollector : MonoBehaviour
             if (currentItem != null)
             {
                 itemsCollected++;
-
                 string itemID = currentItem.GetComponent<CollectableItem>().itemID;
                 checkpointManager.AddCollectedItem(itemID);
-
                 currentItem.SetActive(false);
-
                 questLogManager.SetQuestProgress(itemsCollected);
 
                 PlayerHealth playerHealth = GetComponent<PlayerHealth>();
                 float health = playerHealth != null ? playerHealth.health : 0f;
-
                 checkpointManager.SaveCheckpoint(SceneManager.GetActiveScene().name, transform.position, itemsCollected, health);
+
+                if (collectItemSound != null && audioManager != null)
+                {
+                    audioManager.PlaySFX(collectItemSound);
+                }
 
                 if (itemsCollected >= totalItems)
                 {
@@ -78,7 +82,7 @@ public class ItemCollector : MonoBehaviour
         checkpointManager.ClearCheckpoint();
         SceneManager.LoadScene(nextSceneName);
     }
-    
+
     public void SetItemsCollected(int progress)
     {
         itemsCollected = progress;

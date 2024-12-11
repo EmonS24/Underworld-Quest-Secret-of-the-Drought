@@ -7,14 +7,18 @@ public class Lever : MonoBehaviour
     public DoorController door;
     public Sprite leverActiveSprite;
     public Sprite leverInactiveSprite;
+
+    [Header("Audio")]
+    public AudioClip leverSound; 
+    public AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private bool isActive = false;
     private bool isPlayerInTrigger = false;
 
-
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer.sprite = leverInactiveSprite;
     }
 
@@ -23,6 +27,10 @@ public class Lever : MonoBehaviour
         if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.E))
         {
             ToggleLever();
+            if (leverSound != null)
+            {
+                audioSource.PlayOneShot(leverSound); 
+            }
         }
     }
 
